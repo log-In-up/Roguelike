@@ -4,7 +4,7 @@
 #include "Memento.h"
 #include "GameState.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	class Caretaker
 	{

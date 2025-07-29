@@ -4,7 +4,7 @@
 #include "GameSettings.h"
 #include "Sprite.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	Block::Block(const sf::Vector2f& position, const sf::Color& color)
 		: GameObject(SETTINGS.TEXTURES_PATH + TEXTURE_ID + ".png", position, (float)SETTINGS.BLOCK_WIDTH, (float)SETTINGS.BLOCK_HEIGHT)

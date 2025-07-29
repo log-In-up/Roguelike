@@ -7,7 +7,7 @@
 #include "Sprite.h"
 #include "Caretaker.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	enum class GameOptions : std::uint8_t
 	{

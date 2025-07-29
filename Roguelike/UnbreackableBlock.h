@@ -1,7 +1,7 @@
 #pragma once
 #include "Block.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	class UnbreackableBlock : public Block
 	{

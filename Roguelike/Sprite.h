@@ -4,7 +4,7 @@
 
 #include "GameSettings.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	bool CheckSpriteIntersection(const sf::Sprite& sprite1, const sf::Sprite& sprite2);
 

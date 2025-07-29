@@ -1,7 +1,7 @@
 #pragma once
 #include "BlockFactory.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	class SimpleBlockFactory final : public BlockFactory
 	{

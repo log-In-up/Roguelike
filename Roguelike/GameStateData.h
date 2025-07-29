@@ -3,7 +3,7 @@
 
 #include "Memento.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	class GameStateData
 	{

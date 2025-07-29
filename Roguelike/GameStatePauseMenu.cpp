@@ -5,7 +5,7 @@
 #include "GameStatePauseMenu.h"
 #include "Text.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	GameStatePauseMenuData::GameStatePauseMenuData()
 	{

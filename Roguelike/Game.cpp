@@ -8,7 +8,7 @@
 #include "GameStatePlaying.h"
 #include "GameStateRecords.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	Game::Game()
 	{

@@ -1,7 +1,7 @@
 #pragma once
 #include <functional>
 
-namespace Arkanoid
+namespace Roguelike
 {
 	class Bonus
 	{

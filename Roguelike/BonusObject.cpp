@@ -8,7 +8,7 @@ namespace
 	const std::string TEXTURE_ID = "ball";
 }
 
-namespace Arkanoid
+namespace Roguelike
 {
 	BonusObject::BonusObject(BonusType typeOfBonus, const sf::Vector2f& position)
 		: GameObject(SETTINGS.TEXTURES_PATH + TEXTURE_ID + ".png", position, (float)SETTINGS.BONUS_BALL_SIZE, (float)SETTINGS.BONUS_BALL_SIZE)

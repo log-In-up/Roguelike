@@ -1,6 +1,6 @@
 #include "Caretaker.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	Caretaker::Caretaker(std::vector<GameState>& originator) : originatorStack(originator)
 	{

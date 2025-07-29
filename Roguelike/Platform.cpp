@@ -11,7 +11,7 @@ namespace
 	const std::string TEXTURE_ID = "platform";
 }
 
-namespace Arkanoid
+namespace Roguelike
 {
 	Platform::Platform(const sf::Vector2f& position)
 		: GameObject(SETTINGS.TEXTURES_PATH + TEXTURE_ID + ".png", position, (float)SETTINGS.PLATFORM_WIDTH, (float)SETTINGS.PLATFORM_HEIGHT)

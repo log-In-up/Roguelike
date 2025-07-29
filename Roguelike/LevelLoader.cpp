@@ -5,7 +5,7 @@
 #include "GameSettings.h"
 #include "LevelLoader.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	LevelLoader::LevelLoader()
 	{

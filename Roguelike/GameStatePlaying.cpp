@@ -12,7 +12,7 @@
 #include "ThreeHitBlockFactory.h"
 #include "UnbreackableBlockFactory.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	GameStatePlayingData::GameStatePlayingData()
 	{

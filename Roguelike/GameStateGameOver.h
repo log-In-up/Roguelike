@@ -3,7 +3,7 @@
 
 #include "GameStateData.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	class Game;
 

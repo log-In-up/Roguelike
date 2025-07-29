@@ -2,7 +2,7 @@
 #include "Block.h"
 #include "IDelayedAction.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	class SmoothDestroyableBlock : public Block, public IDelayedAction
 	{

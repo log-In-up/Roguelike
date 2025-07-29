@@ -1,7 +1,7 @@
 #include "ThreeHitBlock.h"
 #include "ThreeHitBlockFactory.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	std::shared_ptr<Block> ThreeHitBlockFactory::CreateBlock(const sf::Vector2f& position)
 	{

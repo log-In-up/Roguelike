@@ -61,9 +61,6 @@
     <ClCompile Include="GameStateRecords.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="LevelLoader.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="Memento.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
@@ -97,6 +94,9 @@
     <ClCompile Include="UnbreackableBlockFactory.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="LevelLoader.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -120,7 +120,6 @@
     <ClInclude Include="GameStateRecords.h" />
     <ClInclude Include="IDelayedAction.h" />
     <ClInclude Include="IObserver.h" />
-    <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="Memento.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Platform.h" />
@@ -134,5 +133,6 @@
     <ClInclude Include="UnbreackableBlock.h" />
     <ClInclude Include="UnbreackableBlockFactory.h" />
     <ClInclude Include="Vector.h" />
+    <ClInclude Include="LevelLoader.h" />
   </ItemGroup>
 </Project>

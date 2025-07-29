@@ -6,7 +6,7 @@
 #include "GameStateGameWin.h"
 #include "Text.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	GameStateGameWinData::GameStateGameWinData()
 	{

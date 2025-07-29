@@ -4,7 +4,7 @@
 #include "Collidable.h"
 #include "GameObject.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	class Platform : public GameObject, public Colladiable
 	{

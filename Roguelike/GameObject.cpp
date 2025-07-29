@@ -3,7 +3,7 @@
 #include "GameObject.h"
 #include "Sprite.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	GameObject::GameObject(const std::string& texturePath, const sf::Vector2f& position, float width, float height) :
 		startPosition(position)

@@ -7,7 +7,7 @@
 #include "GameStateRecords.h"
 #include "Text.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	GameStateRecordsData::GameStateRecordsData()
 	{

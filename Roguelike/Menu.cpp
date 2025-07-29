@@ -2,7 +2,7 @@
 
 #include "Menu.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	MenuItem& Menu::GetCurrentContext()
 	{

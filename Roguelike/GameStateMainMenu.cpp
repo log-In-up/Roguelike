@@ -5,7 +5,7 @@
 #include "GameStateMainMenu.h"
 #include "Text.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	GameStateMainMenuData::GameStateMainMenuData()
 	{
@@ -139,7 +139,7 @@ namespace Arkanoid
 		exitGameItem.childrens.push_back(noItem);
 
 		MenuItem mainMenu;
-		SetTextData(mainMenu.hintText, "Arkanoid Game", *font, 48, sf::Color::Red);
+		SetTextData(mainMenu.hintText, "Roguelike Game", *font, 48, sf::Color::Red);
 		mainMenu.childrenOrientation = Orientation::Vertical;
 		mainMenu.childrenAlignment = Alignment::Middle;
 		mainMenu.childrenSpacing = 10.f;

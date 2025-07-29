@@ -9,7 +9,7 @@
 #include "GameStatePlaying.h"
 #include "GameStateRecords.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	GameState::GameState(GameStateType type, bool isExclusivelyVisible)
 		: type(type)

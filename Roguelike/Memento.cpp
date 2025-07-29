@@ -1,6 +1,6 @@
 #include "Memento.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	Memento::Memento(int state) : mementoState(state)
 	{

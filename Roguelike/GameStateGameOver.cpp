@@ -6,7 +6,7 @@
 #include "GameStateGameOver.h"
 #include "Text.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	GameStateGameOverData::GameStateGameOverData()
 	{

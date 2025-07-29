@@ -5,7 +5,7 @@
 #include "GameObject.h"
 #include "IObserver.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	enum class BonusType
 	{

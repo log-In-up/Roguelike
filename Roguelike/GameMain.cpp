@@ -2,7 +2,7 @@
 
 int main()
 {
-	Arkanoid::Application::Instance().Run();
+	Roguelike::Application::Instance().Run();
 
 	return 0;
 }

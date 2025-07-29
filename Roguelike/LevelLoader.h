@@ -7,7 +7,7 @@
 #include "Block.h"
 #include "ThreeHitBlock.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	enum class BlockType
 	{

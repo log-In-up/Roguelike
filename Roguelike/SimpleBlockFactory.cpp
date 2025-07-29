@@ -1,7 +1,7 @@
 #include "SimpleBlockFactory.h"
 #include "SmoothDestroyableBlock.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	std::shared_ptr<Block> SimpleBlockFactory::CreateBlock(const sf::Vector2f& position)
 	{

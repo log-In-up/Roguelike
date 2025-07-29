@@ -1,6 +1,6 @@
 #include "Bonus.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	Bonus::Bonus(std::function<void()>&& bonusActivate, std::function<void()>&& bonusDeactivate, float bonusDuration) :
 		activation(std::move(bonusActivate)),

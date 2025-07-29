@@ -1,7 +1,7 @@
 #include "Block.h"
 #include "BlockFactory.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	int BlockFactory::GetcreatedBreackableBlocksCount()
 	{

@@ -1,6 +1,6 @@
 #include "UnbreackableBlock.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	UnbreackableBlock::UnbreackableBlock(const sf::Vector2f& position) : Block(position, sf::Color::Color(105u, 105u, 105u))
 	{

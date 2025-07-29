@@ -2,7 +2,7 @@
 
 #include "Application.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	Application& Application::Instance()
 	{

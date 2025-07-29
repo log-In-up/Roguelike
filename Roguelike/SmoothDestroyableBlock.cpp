@@ -3,7 +3,7 @@
 #include "GameSettings.h"
 #include "SmoothDestroyableBlock.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	SmoothDestroyableBlock::SmoothDestroyableBlock(const sf::Vector2f& position, const sf::Color& color) : Block(position, color)
 	{

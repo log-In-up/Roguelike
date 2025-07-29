@@ -1,7 +1,7 @@
 #include "GameSettings.h"
 #include "ThreeHitBlock.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	ThreeHitBlock::ThreeHitBlock(const sf::Vector2f& position)
 		: SmoothDestroyableBlock(position, sf::Color::Magenta)

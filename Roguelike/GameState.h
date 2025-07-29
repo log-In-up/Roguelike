@@ -4,7 +4,7 @@
 #include "GameStateData.h"
 #include "Memento.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	enum class GameStateType
 	{

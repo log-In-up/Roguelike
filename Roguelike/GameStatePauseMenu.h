@@ -4,7 +4,7 @@
 #include "GameStateData.h"
 #include "Menu.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	class Game;
 

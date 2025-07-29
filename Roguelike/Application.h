@@ -3,7 +3,7 @@
 
 #include "Game.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	class Application
 	{

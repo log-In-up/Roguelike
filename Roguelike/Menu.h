@@ -5,7 +5,7 @@
 
 #include "Text.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	struct MenuItem
 	{

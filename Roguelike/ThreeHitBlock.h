@@ -5,7 +5,7 @@
 #include "Collidable.h"
 #include "SmoothDestroyableBlock.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	class ThreeHitBlock : public SmoothDestroyableBlock
 	{

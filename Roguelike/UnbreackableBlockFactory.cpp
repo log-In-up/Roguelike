@@ -1,7 +1,7 @@
 #include "UnbreackableBlock.h"
 #include "UnbreackableBlockFactory.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	std::shared_ptr<Block> UnbreackableBlockFactory::CreateBlock(const sf::Vector2f& position)
 	{

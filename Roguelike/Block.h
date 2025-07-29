@@ -10,7 +10,7 @@ namespace
 	const std::string TEXTURE_ID = "platform";
 }
 
-namespace Arkanoid
+namespace Roguelike
 {
 	class Block : public GameObject, public Colladiable, public IObservable
 	{

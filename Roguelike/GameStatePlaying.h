@@ -12,7 +12,7 @@
 #include "Platform.h"
 #include "BonusObject.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	class Game;
 	class Block;
