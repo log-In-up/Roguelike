@@ -9,7 +9,7 @@
 #include "GameStatePlaying.h"
 #include "GameStateRecords.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	GameState::GameState(GameStateType type, bool isExclusivelyVisible)
 		: type(type)
@@ -71,19 +71,9 @@ namespace Arkanoid
 		data->Draw(window);
 	}
 
-	void GameState::GetGameStateData(Memento& memento)
-	{
-		data->GetStateData(memento);
-	}
-
 	void GameState::HandleWindowEvent(sf::Event& event)
 	{
 		data->HandleWindowEvent(event);
-	}
-
-	void GameState::SetGameStateData(Memento& memento)
-	{
-		data->SetStateData(memento);
 	}
 
 	void GameState::Update(float timeDelta)

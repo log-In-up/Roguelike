@@ -5,7 +5,7 @@
 #include "GameStatePauseMenu.h"
 #include "Text.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	GameStatePauseMenuData::GameStatePauseMenuData()
 	{
@@ -35,10 +35,6 @@ namespace Arkanoid
 		window.draw(*titleText);
 
 		menu->Draw(window, window.getView().getCenter(), { 0.5f, 0.f });
-	}
-
-	void GameStatePauseMenuData::GetStateData(Memento& memento)
-	{
 	}
 
 	void GameStatePauseMenuData::HandleWindowEvent(const sf::Event& event)
@@ -96,10 +92,6 @@ namespace Arkanoid
 		pauseMenu.childrens.push_back(exitItem);
 
 		menu->Init(pauseMenu);
-	}
-
-	void GameStatePauseMenuData::SetStateData(Memento& memento)
-	{
 	}
 
 	void GameStatePauseMenuData::Update(float timeDelta)

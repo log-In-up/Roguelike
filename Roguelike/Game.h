@@ -5,9 +5,8 @@
 #include "GameSettings.h"
 #include "GameState.h"
 #include "Sprite.h"
-#include "Caretaker.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	enum class GameOptions : std::uint8_t
 	{
@@ -37,7 +36,6 @@ namespace Arkanoid
 		GameStateType pendingGameStateType = GameStateType::None;
 
 		RecordsTable* recordsTable;
-		Caretaker* caretaker;
 
 		GameOptions options = GameOptions::Default;
 		bool pendingGameStateIsExclusivelyVisible = false;

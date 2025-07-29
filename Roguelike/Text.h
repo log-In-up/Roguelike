@@ -3,7 +3,7 @@
 
 #include "Vector.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	// Helper method for organizing text items
 	enum class Orientation

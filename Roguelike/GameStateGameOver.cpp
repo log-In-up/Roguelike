@@ -6,7 +6,7 @@
 #include "GameStateGameOver.h"
 #include "Text.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	GameStateGameOverData::GameStateGameOverData()
 	{
@@ -54,10 +54,6 @@ namespace Arkanoid
 		hintText->setOrigin(GetTextOrigin(*hintText, { 0.5f, 1.f }));
 		hintText->setPosition(viewSize.x / 2.f, viewSize.y - 50.f);
 		window.draw(*hintText);
-	}
-
-	void GameStateGameOverData::GetStateData(Memento& memento)
-	{
 	}
 
 	void GameStateGameOverData::HandleWindowEvent(const sf::Event& event)
@@ -134,10 +130,6 @@ namespace Arkanoid
 		}
 
 		SetTextData(*hintText, "Press Space to restart\nEsc to exit to main menu", *font, 24, sf::Color::White);
-	}
-
-	void GameStateGameOverData::SetStateData(Memento& memento)
-	{
 	}
 
 	void GameStateGameOverData::Update(float timeDelta)

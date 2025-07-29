@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Arkanoid
+namespace Roguelike
 {
 	template<typename T>
 	struct Vector2D

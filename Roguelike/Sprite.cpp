@@ -1,7 +1,7 @@
 #include "GameSettings.h"
 #include "Sprite.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	bool CheckSpriteIntersection(const sf::Sprite& sprite1, const sf::Sprite& sprite2) {
 		const auto distance = sprite1.getPosition() - sprite2.getPosition();

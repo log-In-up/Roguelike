@@ -161,12 +161,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
-    <ClCompile Include="Ball.cpp" />
-    <ClCompile Include="Block.cpp" />
-    <ClCompile Include="BlockFactory.cpp" />
-    <ClCompile Include="Bonus.cpp" />
-    <ClCompile Include="BonusObject.cpp" />
-    <ClCompile Include="Caretaker.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameMain.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -178,27 +172,12 @@
     <ClCompile Include="GameStatePauseMenu.cpp" />
     <ClCompile Include="GameStatePlaying.cpp" />
     <ClCompile Include="GameStateRecords.cpp" />
-    <ClCompile Include="LevelLoader.cpp" />
-    <ClCompile Include="Memento.cpp" />
     <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="Platform.cpp" />
-    <ClCompile Include="SimpleBlockFactory.cpp" />
-    <ClCompile Include="SmoothDestroyableBlock.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Text.cpp" />
-    <ClCompile Include="ThreeHitBlock.cpp" />
-    <ClCompile Include="ThreeHitBlockFactory.cpp" />
-    <ClCompile Include="UnbreackableBlock.cpp" />
-    <ClCompile Include="UnbreackableBlockFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
-    <ClInclude Include="Ball.h" />
-    <ClInclude Include="Block.h" />
-    <ClInclude Include="BlockFactory.h" />
-    <ClInclude Include="Bonus.h" />
-    <ClInclude Include="BonusObject.h" />
-    <ClInclude Include="Caretaker.h" />
     <ClInclude Include="Collidable.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
@@ -213,19 +192,10 @@
     <ClInclude Include="GameStateRecords.h" />
     <ClInclude Include="IDelayedAction.h" />
     <ClInclude Include="IObserver.h" />
-    <ClInclude Include="LevelLoader.h" />
-    <ClInclude Include="Memento.h" />
     <ClInclude Include="Menu.h" />
-    <ClInclude Include="Platform.h" />
     <ClInclude Include="randomizer.h" />
-    <ClInclude Include="SimpleBlockFactory.h" />
-    <ClInclude Include="SmoothDestroyableBlock.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Text.h" />
-    <ClInclude Include="ThreeHitBlock.h" />
-    <ClInclude Include="ThreeHitBlockFactory.h" />
-    <ClInclude Include="UnbreackableBlock.h" />
-    <ClInclude Include="UnbreackableBlockFactory.h" />
     <ClInclude Include="Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

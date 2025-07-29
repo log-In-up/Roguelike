@@ -3,7 +3,7 @@
 
 #include "GameStateData.h"
 
-namespace Arkanoid
+namespace Roguelike
 {
 	class Game;
 
@@ -21,10 +21,8 @@ namespace Arkanoid
 		GameStateGameOverData();
 		~GameStateGameOverData();
 		void Draw(sf::RenderWindow& window) override;
-		void GetStateData(Memento& memento) override;
 		void HandleWindowEvent(const sf::Event& event) override;
 		void Init() override;
-		void SetStateData(Memento& memento) override;
 		void Update(float timeDelta) override;
 	};
 }
