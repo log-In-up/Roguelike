@@ -37,10 +37,6 @@ namespace Roguelike
 		menu->Draw(window, window.getView().getCenter(), { 0.5f, 0.f });
 	}
 
-	void GameStatePauseMenuData::GetStateData(Memento& memento)
-	{
-	}
-
 	void GameStatePauseMenuData::HandleWindowEvent(const sf::Event& event)
 	{
 		if (event.type == sf::Event::KeyPressed)
@@ -96,10 +92,6 @@ namespace Roguelike
 		pauseMenu.childrens.push_back(exitItem);
 
 		menu->Init(pauseMenu);
-	}
-
-	void GameStatePauseMenuData::SetStateData(Memento& memento)
-	{
 	}
 
 	void GameStatePauseMenuData::Update(float timeDelta)

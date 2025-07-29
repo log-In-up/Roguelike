@@ -2,7 +2,6 @@
 #include <SFML/Graphics.hpp>
 
 #include "GameStateData.h"
-#include "Memento.h"
 
 namespace Roguelike
 {
@@ -63,9 +62,7 @@ namespace Roguelike
 		GameState& operator= (const GameState& state) = delete;
 
 		void Draw(sf::RenderWindow& window);
-		void GetGameStateData(Memento& memento);
 		void HandleWindowEvent(sf::Event& event);
-		void SetGameStateData(Memento& memento);
 		void Update(float timeDelta);
 	};
 }

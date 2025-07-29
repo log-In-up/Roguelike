@@ -51,10 +51,6 @@ namespace Roguelike
 		window.draw(*hintText);
 	}
 
-	void GameStateRecordsData::GetStateData(Memento& memento)
-	{
-	}
-
 	void GameStateRecordsData::HandleWindowEvent(const sf::Event& event)
 	{
 		if (event.type == sf::Event::KeyPressed)
@@ -95,10 +91,6 @@ namespace Roguelike
 		}
 
 		SetTextData(*hintText, "Press ESC to return back to main menu", *font, 24, sf::Color::White);
-	}
-
-	void GameStateRecordsData::SetStateData(Memento& memento)
-	{
 	}
 
 	void GameStateRecordsData::Update(float timeDelta)

@@ -13,24 +13,6 @@
     <ClCompile Include="Application.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="Ball.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Block.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="BlockFactory.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Bonus.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="BonusObject.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Caretaker.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
@@ -61,19 +43,7 @@
     <ClCompile Include="GameStateRecords.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="Memento.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="Menu.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Platform.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="SimpleBlockFactory.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="SmoothDestroyableBlock.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="Sprite.cpp">
@@ -82,30 +52,9 @@
     <ClCompile Include="Text.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="ThreeHitBlock.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="ThreeHitBlockFactory.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="UnbreackableBlock.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="UnbreackableBlockFactory.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelLoader.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
-    <ClInclude Include="Ball.h" />
-    <ClInclude Include="Block.h" />
-    <ClInclude Include="BlockFactory.h" />
-    <ClInclude Include="Bonus.h" />
-    <ClInclude Include="BonusObject.h" />
-    <ClInclude Include="Caretaker.h" />
     <ClInclude Include="Collidable.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
@@ -120,19 +69,10 @@
     <ClInclude Include="GameStateRecords.h" />
     <ClInclude Include="IDelayedAction.h" />
     <ClInclude Include="IObserver.h" />
-    <ClInclude Include="Memento.h" />
     <ClInclude Include="Menu.h" />
-    <ClInclude Include="Platform.h" />
     <ClInclude Include="randomizer.h" />
-    <ClInclude Include="SimpleBlockFactory.h" />
-    <ClInclude Include="SmoothDestroyableBlock.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Text.h" />
-    <ClInclude Include="ThreeHitBlock.h" />
-    <ClInclude Include="ThreeHitBlockFactory.h" />
-    <ClInclude Include="UnbreackableBlock.h" />
-    <ClInclude Include="UnbreackableBlockFactory.h" />
     <ClInclude Include="Vector.h" />
-    <ClInclude Include="LevelLoader.h" />
   </ItemGroup>
 </Project>

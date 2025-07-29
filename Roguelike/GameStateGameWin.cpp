@@ -41,10 +41,6 @@ namespace Roguelike
 		window.draw(*hintText);
 	}
 
-	void GameStateGameWinData::GetStateData(Memento& memento)
-	{
-	}
-
 	void GameStateGameWinData::HandleWindowEvent(const sf::Event& event)
 	{
 		if (event.type == sf::Event::KeyPressed)
@@ -74,10 +70,6 @@ namespace Roguelike
 		gameWinText->setStyle(sf::Text::Bold);
 
 		SetTextData(*hintText, "Press Space to restart\nEsc to exit to main menu", *font, 24, sf::Color::White);
-	}
-
-	void GameStateGameWinData::SetStateData(Memento& memento)
-	{
 	}
 
 	void GameStateGameWinData::Update(float timeDelta)

@@ -71,19 +71,9 @@ namespace Roguelike
 		data->Draw(window);
 	}
 
-	void GameState::GetGameStateData(Memento& memento)
-	{
-		data->GetStateData(memento);
-	}
-
 	void GameState::HandleWindowEvent(sf::Event& event)
 	{
 		data->HandleWindowEvent(event);
-	}
-
-	void GameState::SetGameStateData(Memento& memento)
-	{
-		data->SetStateData(memento);
 	}
 
 	void GameState::Update(float timeDelta)

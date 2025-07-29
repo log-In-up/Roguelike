@@ -5,7 +5,6 @@
 #include "GameSettings.h"
 #include "GameState.h"
 #include "Sprite.h"
-#include "Caretaker.h"
 
 namespace Roguelike
 {
@@ -37,7 +36,6 @@ namespace Roguelike
 		GameStateType pendingGameStateType = GameStateType::None;
 
 		RecordsTable* recordsTable;
-		Caretaker* caretaker;
 
 		GameOptions options = GameOptions::Default;
 		bool pendingGameStateIsExclusivelyVisible = false;
