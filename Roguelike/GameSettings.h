@@ -23,8 +23,8 @@ namespace Roguelike
 
 		// Game settings constants
 		const int MAX_APPLES = 80;
-		const unsigned int SCREEN_WIDTH = 800;
-		const unsigned int SCREEN_HEIGHT = 600;
+		const unsigned int SCREEN_WIDTH = 1280;
+		const unsigned int SCREEN_HEIGHT = 720;
 		const float TIME_PER_FRAME = 1.f / 60.f; // 60 fps
 
 		const unsigned int BALL_SIZE = 20;
@@ -49,7 +49,7 @@ namespace Roguelike
 		const int MAX_RECORDS_TABLE_SIZE = 5;
 		const char* PLAYER_NAME = "Player";
 
-		const std::string GAME_NAME = "ArkanoidGame";
+		const std::string GAME_NAME = "Roguelike";
 		const float BREAK_DELAY = 1.f;
 		const float BONUS_DURATION = 10.f;
 		const int BONUS_PROPABILITY_PERCENT = 10;

@@ -123,14 +123,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>SFML_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\SFML\SFML-2.5.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine;$(SolutionDir)\SFML\SFML-2.5.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\SFML\SFML-2.5.1\lib;%(AdditionalIncludeDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-main-d.lib;sfml-graphics-s-d.lib;sfml-window-s-d.lib;sfml-system-s-d.lib;sfml-audio-s-d.lib;sfml-network-s-d.lib;ws2_32.lib;opengl32.lib;freetype.lib;winmm.lib;gdi32.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\$(Platform)\$(Configuration)\;$(SolutionDir)\SFML\SFML-2.5.1\lib;%(AdditionalIncludeDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Engine.lib;sfml-main-d.lib;sfml-graphics-s-d.lib;sfml-window-s-d.lib;sfml-system-s-d.lib;sfml-audio-s-d.lib;sfml-network-s-d.lib;ws2_32.lib;opengl32.lib;freetype.lib;winmm.lib;gdi32.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
@@ -161,6 +161,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="DeveloperLevel.cpp" />
+    <ClCompile Include="Floor.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameMain.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -172,13 +174,19 @@
     <ClCompile Include="GameStatePauseMenu.cpp" />
     <ClCompile Include="GameStatePlaying.cpp" />
     <ClCompile Include="GameStateRecords.cpp" />
+    <ClCompile Include="MazeGenerator.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Music.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Text.cpp" />
+    <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="Collidable.h" />
+    <ClInclude Include="DeveloperLevel.h" />
+    <ClInclude Include="Floor.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameSettings.h" />
@@ -192,11 +200,15 @@
     <ClInclude Include="GameStateRecords.h" />
     <ClInclude Include="IDelayedAction.h" />
     <ClInclude Include="IObserver.h" />
+    <ClInclude Include="MazeGenerator.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="Music.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="randomizer.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="Vector.h" />
+    <ClInclude Include="Wall.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

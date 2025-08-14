@@ -52,6 +52,24 @@
     <ClCompile Include="Text.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="DeveloperLevel.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Floor.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="MazeGenerator.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Music.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Wall.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -74,5 +92,11 @@
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="Vector.h" />
+    <ClInclude Include="DeveloperLevel.h" />
+    <ClInclude Include="Floor.h" />
+    <ClInclude Include="MazeGenerator.h" />
+    <ClInclude Include="Music.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Wall.h" />
   </ItemGroup>
 </Project>

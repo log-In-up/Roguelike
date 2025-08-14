@@ -49,6 +49,20 @@ namespace GameEngine
 			return newComponent;
 		}
 
+		template <typename T, typename... Args>
+		T* AddComponent(Args&&... args)
+		{
+			if constexpr (!std::is_base_of<Component, T>::value)
+			{
+				return nullptr;
+			}
+
+			T* newComponent = new T(this, std::forward<Args>(args)...);
+			components.push_back(newComponent);
+
+			return newComponent;
+		}
+
 		void RemoveComponent(Component* component)
 		{
 			components.erase(std::remove_if(components.begin(), components.end(), [component](Component* obj) { return obj == component; }), components.end());

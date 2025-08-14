@@ -4,7 +4,9 @@
 
 namespace GameEngine
 {
-	InputComponent::InputComponent(GameObject* gameObject) : Component(gameObject) {}
+	InputComponent::InputComponent(GameObject* gameObject) : Component(gameObject)
+	{
+	}
 
 	float InputComponent::GetHorizontalAxis() const
 	{
