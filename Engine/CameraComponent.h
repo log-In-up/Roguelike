@@ -10,12 +10,14 @@ namespace GameEngine
 	private:
 		TransformComponent* transform;
 		sf::View* view;
+		sf::FloatRect* rectangle;
+		float width;
+		float height;
 	public:
-		CameraComponent(GameObject* gameObject);
+		CameraComponent(GameObject* gameObject, float width, float height);
 		~CameraComponent();
 
 		void Render(sf::RenderWindow& window) override;
-		void SetBaseResolution(int width, int height);
 		void Update(float deltaTime) override;
 		void ZoomBy(float newZoom);
 	};

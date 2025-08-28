@@ -48,13 +48,15 @@ namespace Roguelike
 		Game();
 		~Game();
 		bool IsEnableOptions(GameOptions option) const;
+		bool Update(float timeDelta); /// Return false if game should be closed
 		int GetRecordByPlayerId(const std::string& playerId) const;
+		void Draw(sf::RenderWindow& window);
 		void ExitGame();
+		void HandleWindowEvents(sf::RenderWindow& window);
 		void LoadNextLevel();
 		void LooseGame();
 		void PauseGame();
-		/// Remove current game state from the stack
-		void PopState();
+		void PopState(); /// Remove current game state from the stack
 		void QuitGame();
 		void SetOption(GameOptions option, bool value);
 		void ShowRecords();
@@ -63,10 +65,6 @@ namespace Roguelike
 		void UpdateRecord(const std::string& playerId, int score);
 		void WinGame();
 	private:
-		/// Return false if game should be closed
-		bool Update(float timeDelta);
-		void Draw(sf::RenderWindow& window);
-		void HandleWindowEvents(sf::RenderWindow& window);
 		/// Add new game state on top of the stack
 		void PushState(GameStateType stateType, bool isExclusivelyVisible);
 		void Shutdown();

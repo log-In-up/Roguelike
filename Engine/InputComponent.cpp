@@ -40,12 +40,12 @@ namespace GameEngine
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
-			horizontalAxis += 1.0f;
+			horizontalAxis -= 1.0f;
 			LOG_INFO("Move right");
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
-			horizontalAxis -= 1.0f;
+			horizontalAxis += 1.0f;
 			LOG_INFO("Move left");
 		}
 	}

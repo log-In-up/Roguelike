@@ -1,6 +1,10 @@
 #include <cstdlib>
+#include <RenderSystem.h>
+#include <GameWorld.h>
+//#include <Logger.h>
 
 #include "Application.h"
+#include <Engine.h>
 
 namespace Roguelike
 {
@@ -12,25 +16,49 @@ namespace Roguelike
 
 	void Application::Run()
 	{
+		GameEngine::Engine::Instance()->SetupLogger();
+
 		sf::Clock gameClock;
+		sf::Event event;
 
-		while (window->isOpen())
+		//LOG_INFO("Program was started!");
+
+		GameEngine::RenderSystem::Instance()->SetMainWindow(window);
+
+		while (GameEngine::RenderSystem::Instance()->GetMainWindow().isOpen())
 		{
-			float startTime = gameClock.getElapsedTime().asSeconds();
+			sf::Time dt = gameClock.restart();
+			float deltaTime = dt.asSeconds();
 
-			if (!window->isOpen())
+			game->HandleWindowEvents(*window);
+			while (GameEngine::RenderSystem::Instance()->GetMainWindow().pollEvent(event))
+			{
+				if (event.type == sf::Event::Closed)
+				{
+					GameEngine::RenderSystem::Instance()->GetMainWindow().close();
+				}
+			}
+
+			if (!game->Update(deltaTime))
+			{
+				GameEngine::RenderSystem::Instance()->GetMainWindow().close();
+			}
+
+			if (!GameEngine::RenderSystem::Instance()->GetMainWindow().isOpen())
 			{
 				break;
 			}
-			game->UpdateGame(SETTINGS.TIME_PER_FRAME, *window);
 
-			float endTime = gameClock.getElapsedTime().asSeconds();
-			float deltaTime = endTime - startTime;
+			GameEngine::RenderSystem::Instance()->GetMainWindow().clear();
 
-			if (deltaTime < SETTINGS.TIME_PER_FRAME)
-			{
-				sf::sleep(sf::seconds(SETTINGS.TIME_PER_FRAME - deltaTime));
-			}
+			GameEngine::GameWorld::Instance()->Update(deltaTime);
+			GameEngine::GameWorld::Instance()->FixedUpdate(deltaTime);
+
+			GameEngine::GameWorld::Instance()->Render(*window);
+			game->Draw(*window);
+			GameEngine::GameWorld::Instance()->LateUpdate();
+
+			GameEngine::RenderSystem::Instance()->GetMainWindow().display();
 		}
 	}
 

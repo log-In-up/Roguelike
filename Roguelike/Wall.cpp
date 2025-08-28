@@ -7,7 +7,6 @@ namespace Roguelike
 {
 	Wall::Wall(const GameEngine::Vector2Df position, int textureMapIndex) : gameObject(GameEngine::GameWorld::Instance()->CreateGameObject("Wall"))
 	{
-		//gameObject = GameEngine::GameWorld::Instance()->CreateGameObject("Wall");
 		auto transform = gameObject->GetComponent<GameEngine::TransformComponent>();
 		transform->SetWorldPosition(position);
 

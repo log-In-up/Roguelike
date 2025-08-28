@@ -3,6 +3,7 @@
 
 #include "MazeGenerator.h"
 #include "DeveloperLevel.h"
+#include "GameSettings.h"
 
 namespace Roguelike
 {
@@ -77,14 +78,14 @@ namespace Roguelike
 		int wallY = (y1 + y2) / 2;
 
 		level->floors.push_back(std::make_unique<Floor>(
-			GameEngine::Vector2Df{ x1 * 128.f, y1 * 128.f }, 0));
+			GameEngine::Vector2Df{ x1 * SETTINGS.SPRITE_SIZE, y1 * SETTINGS.SPRITE_SIZE }, 0));
 		level->floors.push_back(std::make_unique<Floor>(
-			GameEngine::Vector2Df{ x2 * 128.f, y2 * 128.f }, 0));
+			GameEngine::Vector2Df{ x2 * SETTINGS.SPRITE_SIZE, y2 * SETTINGS.SPRITE_SIZE }, 0));
 
 		if (wallX != x1 || wallY != y1)
 		{
 			level->walls.push_back(std::make_unique<Wall>(
-				GameEngine::Vector2Df{ wallX * 128.f, wallY * 128.f }, 14));
+				GameEngine::Vector2Df{ wallX * SETTINGS.SPRITE_SIZE, wallY * SETTINGS.SPRITE_SIZE }, 14));
 		}
 	}
 }

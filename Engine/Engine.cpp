@@ -17,7 +17,7 @@ namespace GameEngine
 		unsigned int seed = (unsigned int)time(nullptr);
 		srand(seed);
 
-		setupLogger();
+		SetupLogger();
 	}
 
 	void Engine::Run()
@@ -56,7 +56,7 @@ namespace GameEngine
 		}
 	}
 
-	void Engine::setupLogger()
+	void Engine::SetupLogger()
 	{
 		auto logger = std::make_shared<Logger>();
 		logger->AddSink(std::make_shared<ConsoleSink>());

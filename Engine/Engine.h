@@ -14,11 +14,9 @@ namespace GameEngine
 		static Engine* Instance();
 
 		void Run();
-
+		void SetupLogger();
 	private:
 		Engine();
 		~Engine() = default;
-
-		void setupLogger();
 	};
 }

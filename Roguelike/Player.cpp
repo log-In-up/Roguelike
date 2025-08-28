@@ -20,8 +20,7 @@ namespace Roguelike
 		renderer->SetTexture(*GameEngine::ResourceSystem::Instance()->GetTextureMapElementShared("player", 0));
 		renderer->SetPixelSize(100, 100);
 
-		auto camera = gameObject->AddComponent<GameEngine::CameraComponent>();
-		camera->SetBaseResolution(SETTINGS.SCREEN_WIDTH, SETTINGS.SCREEN_HEIGHT);
+		auto camera = gameObject->AddComponent<GameEngine::CameraComponent>(SETTINGS.SCREEN_WIDTH, SETTINGS.SCREEN_HEIGHT);
 
 		auto input = gameObject->AddComponent<GameEngine::InputComponent>();
 

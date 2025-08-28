@@ -49,11 +49,12 @@ namespace GameEngine
 	void GameWorld::FixedUpdate(float deltaTime)
 	{
 		fixedCounter += deltaTime;
-		if (fixedCounter > PhysicsSystem::Instance()->GetFixedDeltaTime())
+		if (fixedCounter <= PhysicsSystem::Instance()->GetFixedDeltaTime())
 		{
-			fixedCounter -= PhysicsSystem::Instance()->GetFixedDeltaTime();
-			PhysicsSystem::Instance()->Update();
+			return;
 		}
+		fixedCounter -= PhysicsSystem::Instance()->GetFixedDeltaTime();
+		PhysicsSystem::Instance()->Update();
 	}
 
 	void GameWorld::LateUpdate()

@@ -5,6 +5,7 @@
 
 #include "GameStateData.h"
 #include "IObserver.h"
+#include "DeveloperLevel.h"
 
 namespace Roguelike
 {
@@ -15,8 +16,7 @@ namespace Roguelike
 	private:
 		sf::Font* font;
 
-		sf::Text* inputHintText;
-		sf::RectangleShape* background;
+		DeveloperLevel* level;
 	public:
 		GameStatePlayingData();
 		~GameStatePlayingData();
