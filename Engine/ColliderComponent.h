@@ -30,6 +30,9 @@ namespace GameEngine
 		void SubscribeCollision(std::function<void(Collision)> onCollisionAction);
 		void SubscribeTriggerEnter(std::function<void(Trigger)> onTriggerEnterAction);
 		void SubscribeTriggerExit(std::function<void(Trigger)> onTriggerExitAction);
+		void UnsubscribeAllCollision();
+		void UnsubscribeAllTriggerEnters();
+		void UnsubscribeAllTriggerExits();
 		void UnsubscribeCollision(std::function<void(Collision)> onCollisionAction);
 		void UnsubscribeTriggerEnter(std::function<void(Trigger)> onTriggerEnterAction);
 		void UnsubscribeTriggerExit(std::function<void(Trigger)> onTriggerExitAction);

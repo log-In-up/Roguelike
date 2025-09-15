@@ -6,7 +6,7 @@ namespace GameEngine
 	class StatsComponent : public Component
 	{
 	public:
-		StatsComponent(GameObject* gameObject, float health, float armor);
+		StatsComponent(GameObject* gameObject, float health, float maxHealth, float armor);
 
 		float GetArmor() const
 		{

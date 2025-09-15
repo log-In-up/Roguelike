@@ -86,7 +86,7 @@ namespace Roguelike
 		MazeGenerator mazeGenerator(width, height, this);
 		mazeGenerator.Generate();
 
-		player = std::make_unique<Player>(std::forward<GameEngine::Vector2Df>({ width / 2 * SETTINGS.SPRITE_SIZE, height / 2 * SETTINGS.SPRITE_SIZE }));
+		//player = std::make_unique<Player>(std::forward<GameEngine::Vector2Df>({ width / 2 * SETTINGS.SPRITE_SIZE, height / 2 * SETTINGS.SPRITE_SIZE }));
 		music = std::make_unique<Music>("music");
 	}
 

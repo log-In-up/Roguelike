@@ -24,7 +24,12 @@ namespace GameEngine
 	{
 		std::cout << "Unsubscribe " << collider << std::endl;
 
-		colliders.erase(std::remove_if(colliders.begin(), colliders.end(), [collider](ColliderComponent* obj) { return obj == collider; }), colliders.end());
+		colliders.erase(std::remove_if(colliders.begin(), colliders.end(),
+			[collider](ColliderComponent* obj)
+			{
+				return obj == collider;
+			}),
+			colliders.end());
 	}
 
 	void PhysicsSystem::Update()
@@ -113,6 +118,11 @@ namespace GameEngine
 
 				triggersEnteredPair.erase(triggeredPair);
 			}
+		}
+
+		if (triggersEnteredPair.size() > 0)
+		{
+			triggersEnteredPair.clear();
 		}
 	}
 }
