@@ -11,7 +11,8 @@
 
 namespace Roguelike
 {
-	Player::Player(const GameEngine::Vector2Df& position) : gameObject(GameEngine::GameWorld::Instance()->CreateGameObject("Player"))
+	Player::Player(const GameEngine::Vector2Df& position, const PlayerData& data)
+		: gameObject(GameEngine::GameWorld::Instance()->CreateGameObject("Player"))
 	{
 		auto transform = gameObject->GetComponent<GameEngine::TransformComponent>();
 		transform->SetWorldPosition(position);
@@ -37,8 +38,26 @@ namespace Roguelike
 		auto animator = gameObject->AddComponent<GameEngine::SpriteMovementAnimationComponent>();
 		animator->Initialize("player", 6.f);
 
-		auto statsComponent = gameObject->AddComponent<GameEngine::StatsComponent>(100.f, 50.f);
+		auto statsComponent = gameObject->AddComponent<GameEngine::StatsComponent>(data.currentHealth, data.maxHealth, data.armor);
 
 		auto attackComponent = gameObject->AddComponent<GameEngine::AttackComponent>(10.f);
+	}
+
+	PlayerData Player::GetPlayerData()
+	{
+		auto statsComponent = gameObject->GetComponent<GameEngine::StatsComponent>();
+
+		PlayerData value{};
+
+		if (statsComponent == nullptr)
+		{
+			return value;
+		}
+
+		value.armor = statsComponent->GetArmor();
+		value.currentHealth = statsComponent->GetCurrentHealth();
+		value.maxHealth = statsComponent->GetMaxHealth();
+
+		return value;
 	}
 }

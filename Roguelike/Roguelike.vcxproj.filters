@@ -70,6 +70,18 @@
     <ClCompile Include="Wall.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="LevelLoader.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLevel.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelExit.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelDataSynchronizer.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -98,5 +110,9 @@
     <ClInclude Include="Music.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Wall.h" />
+    <ClInclude Include="LevelLoader.h" />
+    <ClInclude Include="GameLevel.h" />
+    <ClInclude Include="LevelExit.h" />
+    <ClInclude Include="LevelDataSynchronizer.h" />
   </ItemGroup>
 </Project>

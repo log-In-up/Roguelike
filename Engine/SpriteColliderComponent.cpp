@@ -28,6 +28,10 @@ namespace GameEngine
 
 	void SpriteColliderComponent::Render(sf::RenderWindow& window)
 	{
+#ifdef NDEBUG
+		// nondebug
+#else
+		// debug code
 		sf::RectangleShape rectangle(sf::Vector2f(bounds.width, bounds.height));
 		rectangle.setPosition(bounds.left, bounds.top);
 		rectangle.setFillColor(sf::Color::Transparent);
@@ -35,6 +39,7 @@ namespace GameEngine
 		rectangle.setOutlineThickness(4);
 
 		RenderSystem::Instance()->Render(rectangle);
+#endif
 	}
 
 	void SpriteColliderComponent::Update(float deltaTime)

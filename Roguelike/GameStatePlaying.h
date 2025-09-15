@@ -5,7 +5,8 @@
 
 #include "GameStateData.h"
 #include "IObserver.h"
-#include "DeveloperLevel.h"
+#include "GameLevel.h"
+#include "LevelLoader.h"
 
 namespace Roguelike
 {
@@ -14,9 +15,8 @@ namespace Roguelike
 	class GameStatePlayingData : public GameStateData, public IObserver, public std::enable_shared_from_this<GameStatePlayingData>
 	{
 	private:
-		sf::Font* font;
-
-		DeveloperLevel* level;
+		LevelLoader* loader;
+		GameLevel* level;
 	public:
 		GameStatePlayingData();
 		~GameStatePlayingData();

@@ -3,8 +3,8 @@
 
 namespace GameEngine
 {
-	StatsComponent::StatsComponent(GameObject* gameObject, float health, float armor)
-		: Component(gameObject), currentHealth(health), maxHealth(health), armor(armor)
+	StatsComponent::StatsComponent(GameObject* gameObject, float health, float maxHealth, float armor)
+		: Component(gameObject), currentHealth(health), maxHealth(maxHealth), armor(armor)
 	{
 	}
 
