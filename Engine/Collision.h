@@ -1,20 +1,18 @@
 #pragma once
-#include <SFML/Graphics.hpp>
+#include <SFML/Graphics/Rect.hpp>
 
 namespace GameEngine
 {
-	class ColliderComponent;
+class ColliderComponent;
 
-	struct Collision
-	{
-	private:
-		ColliderComponent* first;
-		ColliderComponent* second;
-		sf::FloatRect collisionRect;
-	public:
-		Collision(ColliderComponent* newFirst, ColliderComponent* newSecond, sf::FloatRect newCollisionRect) :
-			first(newFirst), second(newSecond), collisionRect(newCollisionRect)
-		{
-		};
-	};
-}
+struct Collision
+{
+  public:
+    Collision(ColliderComponent *first, ColliderComponent *second, sf::FloatRect collisionRect)
+        : first(first), second(second), collisionRect(collisionRect) {};
+
+    ColliderComponent *first;
+    ColliderComponent *second;
+    sf::FloatRect collisionRect;
+};
+} // namespace GameEngine

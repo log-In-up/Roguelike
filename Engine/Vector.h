@@ -1,93 +1,159 @@
 #pragma once
+#include <cmath>
+#include <concepts>
+#include <numbers>
 
 namespace GameEngine
 {
-	template<typename T>
-	struct Vector2D
-	{
-		T x = (T)0;
-		T y = (T)0;
+template <typename T> struct Vector2D
+{
+    T x;
+    T y;
 
-		Vector2D()
-		{
-			x = (T)0;
-			y = (T)0;
-		}
+    Vector2D() : x(T(0)), y(T(0)) {};
+    Vector2D(T x, T y) : x(x), y(y) {};
 
-		Vector2D(T newX, T newY)
-		{
-			x = newX;
-			y = newY;
-		}
+    Vector2D &operator-()
+    {
+        x *= -1;
+        y *= -1;
+        return *this;
+    }
 
-		float GetLength()
-		{
-			return sqrtf(x * x + y * y);
-		}
+    Vector2D &operator+=(const Vector2D &other)
+    {
+        x += other.x;
+        y += other.y;
+        return *this;
+    }
 
-		float DotProduct(const Vector2D<T>& vector)
-		{
-			return x * vector.x + y * vector.y;
-		}
-	};
+    Vector2D &operator-=(const Vector2D &other)
+    {
+        x -= other.x;
+        y -= other.y;
+        return *this;
+    }
 
-	using Vector2Df = Vector2D<float>;
-	using Vector2Di = Vector2D<int>;
-	using Position = Vector2Df;
+    Vector2D &operator*=(const T &scalar)
+    {
+        x *= scalar;
+        y *= scalar;
+        return *this;
+    }
 
-	template<typename T>
-	Vector2D<T> operator+(const Vector2D<T>& left, const Vector2D<T>& right)
-	{
-		return { left.x + right.x, left.y + right.y };
-	}
+    Vector2D &operator*=(const Vector2D &other)
+    {
+        x *= other.x;
+        y *= other.y;
+        return *this;
+    }
 
-	template<typename T>
-	Vector2D<T> operator-(const Vector2D<T>& left, const Vector2D<T>& right)
-	{
-		return { left.x - right.x, left.y - right.y };
-	}
+    T DotProduct(const Vector2D &other) const
+    {
+        return x * other.x + y * other.y;
+    }
 
-	template<typename T>
-	Vector2D<T> operator-(const Vector2D<T>& left)
-	{
-		return { -left.x, -left.y };
-	}
+    float GetLength() const
+    {
+        return sqrtf(x * x + y * y);
+    }
+};
 
-	template<typename T>
-	Vector2D<T> operator*(const Vector2D<T>& left, const Vector2D<T>& right)
-	{
-		return { left.x * right.x, left.y * right.y };
-	}
+using Vector2Df = Vector2D<float>;
+using Vector2Di = Vector2D<int>;
+using Position = Vector2Df;
 
-	template<typename T>
-	Vector2D<T> operator*(const T scalar, const Vector2D<T>& right)
-	{
-		return { scalar * right.x, scalar * right.y };
-	}
-
-	template<typename T>
-	Vector2D<T> operator*(const Vector2D<T>& left, const T scalar)
-	{
-		return { scalar * left.x, scalar * left.y };
-	}
-
-	template<typename T>
-	bool operator==(const Vector2D<T>& left, const Vector2D<T>& right)
-	{
-		return left.x == right.x && left.y == right.y;
-	}
-
-	template<typename T>
-	bool operator!=(const Vector2D<T>& left, const Vector2D<T>& right)
-	{
-		return left.x != right.x || left.y != right.y;
-	}
-
-	// This complex template allows us to convert any vector type to any other vector type (like our Vector2D to SFML's Vector and vice versa)
-	template<typename U, typename V>
-	U Convert(const V& v)
-	{
-		// decltype deduces type from expression
-		return { static_cast<decltype(U::x)>(v.x), static_cast<decltype(U::y)>(v.y) };
-	}
+template <typename T> Vector2D<T> operator+(Vector2D<T> left, const Vector2D<T> &right)
+{
+    return left += right;
 }
+
+template <typename T> Vector2D<T> operator-(Vector2D<T> left, const Vector2D<T> &right)
+{
+    return left -= right;
+}
+
+template <typename T> bool operator==(const Vector2D<T> &left, const Vector2D<T> &right)
+{
+    return (left.x == right.x) && (left.y == right.y);
+}
+
+template <typename T> bool operator!=(const Vector2D<T> &left, const Vector2D<T> &right)
+{
+    return !(left == right);
+}
+
+template <typename T> T DotProduct(Vector2D<T> left, const Vector2D<T> &right)
+{
+    return left.DotProduct(right);
+}
+
+template <typename T> Vector2D<T> operator*(Vector2D<T> left, const Vector2D<T> &rigth)
+{
+    return left *= rigth;
+}
+
+template <typename T> Vector2D<T> operator*(Vector2D<T> left, const T scalar)
+{
+    return left *= scalar;
+}
+
+template <typename T> Vector2D<T> operator*(const T scalar, Vector2D<T> rigth)
+{
+    return rigth *= scalar;
+}
+
+template <typename U, typename V> U Convert(const V &v)
+{
+    return {static_cast<decltype(U::x)>(v.x), static_cast<decltype(U::y)>(v.y)};
+}
+
+template <typename T>
+    requires std::floating_point<T>
+T DegreeToRadian(const T angle)
+{
+    return angle * std::numbers::pi_v<T> / 180.0F;
+}
+
+template <typename T>
+    requires std::floating_point<T>
+T RadianToDegree(const T angle)
+{
+    return angle * std::numbers::inv_pi_v<T> * 180.0F;
+}
+
+template <typename T> float AngleDegree(const Vector2D<T> &firstVector, const Vector2D<T> &secondVector)
+{
+    return RadianToDegree(Angle(firstVector, secondVector));
+}
+
+template <typename T> float Angle(const Vector2D<T> &firstVector, const Vector2D<T> &secondVector)
+{
+    float angleCos = static_cast<float>(DotProduct(firstVector, secondVector)) /
+                     (firstVector.GetLength() * secondVector.GetLength());
+    return acosf(angleCos);
+}
+
+template <typename T>
+    requires std::floating_point<T>
+Vector2D<T> Normalized(const Vector2D<T> &vector)
+{
+    float length = vector.GetLength();
+    if (length > 0.0F)
+    {
+        return vector * (1.0F / vector.GetLength());
+    }
+    return {0.0F, 0.0F};
+}
+
+template <typename T>
+    requires std::floating_point<T>
+void Rotate(Vector2D<T> &vector, float angle)
+{
+    auto radianAngle = DegreeToRadian(angle);
+    T newX = cosf(radianAngle) * vector.x - sinf(radianAngle) * vector.y;
+    T newY = sinf(radianAngle) * vector.x + cosf(radianAngle) * vector.y;
+    vector.x = newX;
+    vector.y = newY;
+}
+} // namespace GameEngine

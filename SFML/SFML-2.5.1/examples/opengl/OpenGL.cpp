@@ -9,7 +9,6 @@
 #define GL_SRGB8_ALPHA8 0x8C43
 #endif
 
-
 ////////////////////////////////////////////////////////////
 /// Entry point of application
 ///
@@ -29,7 +28,8 @@ int main()
         contextSettings.sRgbCapable = sRgb;
 
         // Create the main window
-        sf::RenderWindow window(sf::VideoMode(800, 600), "SFML graphics with OpenGL", sf::Style::Default, contextSettings);
+        sf::RenderWindow window(sf::VideoMode(800, 600), "SFML graphics with OpenGL", sf::Style::Default,
+                                contextSettings);
         window.setVerticalSyncEnabled(true);
 
         // Create a sprite for the background
@@ -88,51 +88,24 @@ int main()
         sf::Texture::bind(&texture);
 
         // Define a 3D cube (6 faces made of 2 triangles composed by 3 vertices)
-        static const GLfloat cube[] =
-        {
-            // positions    // texture coordinates
-            -20, -20, -20,  0, 0,
-            -20,  20, -20,  1, 0,
-            -20, -20,  20,  0, 1,
-            -20, -20,  20,  0, 1,
-            -20,  20, -20,  1, 0,
-            -20,  20,  20,  1, 1,
+        static const GLfloat cube[] = {// positions    // texture coordinates
+                                       -20, -20, -20, 0, 0, -20, 20,  -20, 1, 0, -20, -20, 20,  0, 1,
+                                       -20, -20, 20,  0, 1, -20, 20,  -20, 1, 0, -20, 20,  20,  1, 1,
 
-             20, -20, -20,  0, 0,
-             20,  20, -20,  1, 0,
-             20, -20,  20,  0, 1,
-             20, -20,  20,  0, 1,
-             20,  20, -20,  1, 0,
-             20,  20,  20,  1, 1,
+                                       20,  -20, -20, 0, 0, 20,  20,  -20, 1, 0, 20,  -20, 20,  0, 1,
+                                       20,  -20, 20,  0, 1, 20,  20,  -20, 1, 0, 20,  20,  20,  1, 1,
 
-            -20, -20, -20,  0, 0,
-             20, -20, -20,  1, 0,
-            -20, -20,  20,  0, 1,
-            -20, -20,  20,  0, 1,
-             20, -20, -20,  1, 0,
-             20, -20,  20,  1, 1,
+                                       -20, -20, -20, 0, 0, 20,  -20, -20, 1, 0, -20, -20, 20,  0, 1,
+                                       -20, -20, 20,  0, 1, 20,  -20, -20, 1, 0, 20,  -20, 20,  1, 1,
 
-            -20,  20, -20,  0, 0,
-             20,  20, -20,  1, 0,
-            -20,  20,  20,  0, 1,
-            -20,  20,  20,  0, 1,
-             20,  20, -20,  1, 0,
-             20,  20,  20,  1, 1,
+                                       -20, 20,  -20, 0, 0, 20,  20,  -20, 1, 0, -20, 20,  20,  0, 1,
+                                       -20, 20,  20,  0, 1, 20,  20,  -20, 1, 0, 20,  20,  20,  1, 1,
 
-            -20, -20, -20,  0, 0,
-             20, -20, -20,  1, 0,
-            -20,  20, -20,  0, 1,
-            -20,  20, -20,  0, 1,
-             20, -20, -20,  1, 0,
-             20,  20, -20,  1, 1,
+                                       -20, -20, -20, 0, 0, 20,  -20, -20, 1, 0, -20, 20,  -20, 0, 1,
+                                       -20, 20,  -20, 0, 1, 20,  -20, -20, 1, 0, 20,  20,  -20, 1, 1,
 
-            -20, -20,  20,  0, 0,
-             20, -20,  20,  1, 0,
-            -20,  20,  20,  0, 1,
-            -20,  20,  20,  0, 1,
-             20, -20,  20,  1, 0,
-             20,  20,  20,  1, 1
-        };
+                                       -20, -20, 20,  0, 0, 20,  -20, 20,  1, 0, -20, 20,  20,  0, 1,
+                                       -20, 20,  20,  0, 1, 20,  -20, 20,  1, 0, 20,  20,  20,  1, 1};
 
         // Enable position and texture coordinates vertex components
         glEnableClientState(GL_VERTEX_ARRAY);
@@ -225,7 +198,7 @@ int main()
             glClear(GL_DEPTH_BUFFER_BIT);
 
             // We get the position of the mouse cursor, so that we can move the box accordingly
-            float x =  sf::Mouse::getPosition(window).x * 200.f / window.getSize().x - 100.f;
+            float x = sf::Mouse::getPosition(window).x * 200.f / window.getSize().x - 100.f;
             float y = -sf::Mouse::getPosition(window).y * 200.f / window.getSize().y + 100.f;
 
             // Apply some transformations

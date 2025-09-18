@@ -1,5 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Windows.CppWinRT.2.0.220531.1\build\native\Microsoft.Windows.CppWinRT.props" Condition="Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.220531.1\build\native\Microsoft.Windows.CppWinRT.props')" />
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -19,10 +20,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>16.0</VCProjectVersion>
+    <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{E577A178-28EE-9E46-357E-6345405620F8}</ProjectGuid>
-    <RootNamespace>Roguelike</RootNamespace>
+    <RootNamespace>Arkanoid</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectName>Roguelike</ProjectName>
   </PropertyGroup>
@@ -72,34 +73,40 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <CustomBuildAfterTargets>Build</CustomBuildAfterTargets>
-    <OutDir>$(ProjectDir)\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(ProjectDir)\$(Platform)\$(Configuration)\</IntDir>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <CustomBuildAfterTargets>Build</CustomBuildAfterTargets>
-    <OutDir>$(ProjectDir)\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(ProjectDir)\$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <EnableClangTidyCodeAnalysis>true</EnableClangTidyCodeAnalysis>
+    <ClangTidyChecks>google-*,bugprone-*,misc-*,perfomance-*,readability-*,clang-diagnostic-*,clang-analyzer-*,-readability-avoid-const-params-in-decls,-clang-diagnostic-pragma-once-outside-header,-misc-non-private-member-variables-in-classes</ClangTidyChecks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(ProjectDir)\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(ProjectDir)\$(Platform)\$(Configuration)\</IntDir>
+    <EnableClangTidyCodeAnalysis>true</EnableClangTidyCodeAnalysis>
+    <ClangTidyChecks>google-*,bugprone-*,misc-*,perfomance-*,readability-*,clang-diagnostic-*,clang-analyzer-*,-readability-avoid-const-params-in-decls,-clang-diagnostic-pragma-once-outside-header,-misc-non-private-member-variables-in-classes</ClangTidyChecks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(ProjectDir)\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(ProjectDir)\$(Platform)\$(Configuration)\</IntDir>
+    <EnableClangTidyCodeAnalysis>true</EnableClangTidyCodeAnalysis>
+    <ClangTidyChecks>google-*,bugprone-*,misc-*,perfomance-*,readability-*,clang-diagnostic-*,clang-analyzer-*,-readability-avoid-const-params-in-decls,-clang-diagnostic-pragma-once-outside-header,-misc-non-private-member-variables-in-classes</ClangTidyChecks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <EnableClangTidyCodeAnalysis>true</EnableClangTidyCodeAnalysis>
+    <ClangTidyChecks>google-*,bugprone-*,misc-*,perfomance-*,readability-*,clang-diagnostic-*,clang-analyzer-*,-readability-avoid-const-params-in-decls,-clang-diagnostic-pragma-once-outside-header,-misc-non-private-member-variables-in-classes</ClangTidyChecks>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NOGDI;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);CREATE_STDOUT_CONSOLE</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>;$(SolutionDir)Engine</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
     </Link>
+    <PreBuildEvent>
+      <Command>$(SolutionDir)RunClangformat.bat</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -107,34 +114,44 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NOGDI;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);CREATE_STDOUT_CONSOLE</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>;$(SolutionDir)Engine</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
     </Link>
+    <PreBuildEvent>
+      <Command>$(SolutionDir)RunClangformat.bat</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>SFML_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NOGDI;SFML_STATIC;_DEBUG;_CONSOLE;_SILENCE_CXX20_CODECVT_FACETS_DEPRECATION_WARNING;%(PreprocessorDefinitions);CREATE_CONSOLE_FOR_ENGINE_PRINT_OUTPUT</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine;$(SolutionDir)\SFML\SFML-2.5.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)\SFML\SFML-2.5.1\include;%(AdditionalIncludeDirectories);$(SolutionDir)Engine</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\$(Platform)\$(Configuration)\;$(SolutionDir)\SFML\SFML-2.5.1\lib;%(AdditionalIncludeDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Engine.lib;sfml-main-d.lib;sfml-graphics-s-d.lib;sfml-window-s-d.lib;sfml-system-s-d.lib;sfml-audio-s-d.lib;sfml-network-s-d.lib;ws2_32.lib;opengl32.lib;freetype.lib;winmm.lib;gdi32.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <IgnoreSpecificDefaultLibraries>
-      </IgnoreSpecificDefaultLibraries>
+      <AdditionalLibraryDirectories>$(SolutionDir)SFML\SFML-2.5.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-main-d.lib;sfml-graphics-s-d.lib;sfml-window-s-d.lib;sfml-system-s-d.lib;sfml-audio-s-d.lib;sfml-network-s-d.lib;ws2_32.lib;opengl32.lib;freetype.lib;winmm.lib;gdi32.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+      <Profile>true</Profile>
     </Link>
+    <PreBuildEvent>
+      <Command>$(SolutionDir)RunClangformat.bat</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -142,83 +159,118 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>SFML_STATIC;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NOGDI;SFML_STATIC;NDEBUG;_CONSOLE;_SILENCE_CXX20_CODECVT_FACETS_DEPRECATION_WARNING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine;$(SolutionDir)\SFML\SFML-2.5.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)\SFML\SFML-2.5.1\include;$(SolutionDir)Engine</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)\$(Platform)\$(Configuration)\;$(SolutionDir)\SFML\SFML-2.5.1\lib;%(AdditionalIncludeDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Engine.lib;sfml-main.lib;sfml-graphics-s.lib;sfml-window-s.lib;sfml-system-s.lib;sfml-audio-s.lib;sfml-network-s.lib;ws2_32.lib;opengl32.lib;freetype.lib;winmm.lib;gdi32.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <IgnoreSpecificDefaultLibraries>
-      </IgnoreSpecificDefaultLibraries>
+      <AdditionalLibraryDirectories>$(SolutionDir)SFML\SFML-2.5.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-main.lib;sfml-graphics-s.lib;sfml-window-s.lib;sfml-system-s.lib;sfml-audio-s.lib;sfml-network-s.lib;ws2_32.lib;opengl32.lib;freetype.lib;winmm.lib;gdi32.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <Profile>true</Profile>
     </Link>
+    <PreBuildEvent>
+      <Command>$(SolutionDir)RunClangformat.bat</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Application.cpp" />
-    <ClCompile Include="DeveloperLevel.cpp" />
-    <ClCompile Include="Floor.cpp" />
-    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="ActorComponent.cpp" />
+    <ClCompile Include="ActorMovementComponent.cpp" />
+    <ClCompile Include="ActorRegisterSystem.cpp" />
+    <ClCompile Include="ActorSpriteDirectionComponent.cpp" />
+    <ClCompile Include="AIActor.cpp" />
+    <ClCompile Include="AIActorManagerSystem.cpp" />
+    <ClCompile Include="AIInputComponent.cpp" />
+    <ClCompile Include="ArmorBarComponent.cpp" />
+    <ClCompile Include="ArmorComponent.cpp" />
+    <ClCompile Include="AttackComponent.cpp" />
+    <ClCompile Include="BarComponent.cpp" />
+    <ClCompile Include="BlockComponent.cpp" />
     <ClCompile Include="GameLevel.cpp" />
-    <ClCompile Include="GameMain.cpp" />
-    <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="GameState.cpp" />
-    <ClCompile Include="GameStateData.cpp" />
-    <ClCompile Include="GameStateGameOver.cpp" />
-    <ClCompile Include="GameStateGameWin.cpp" />
-    <ClCompile Include="GameStateMainMenu.cpp" />
-    <ClCompile Include="GameStatePauseMenu.cpp" />
-    <ClCompile Include="GameStatePlaying.cpp" />
-    <ClCompile Include="GameStateRecords.cpp" />
-    <ClCompile Include="LevelDataSynchronizer.cpp" />
-    <ClCompile Include="LevelExit.cpp" />
-    <ClCompile Include="LevelLoader.cpp" />
-    <ClCompile Include="MazeGenerator.cpp" />
-    <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="Music.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="Text.cpp" />
+    <ClCompile Include="HealthBarComponent.cpp" />
+    <ClCompile Include="HealthComponent.cpp" />
+    <ClCompile Include="KeyboardInputComponent.cpp" />
+    <ClCompile Include="LabyrinthExit.cpp" />
+    <ClCompile Include="LevelCompleteCondition.cpp" />
+    <ClCompile Include="LevelManager.cpp" />
+    <ClCompile Include="OpaqueComponent.cpp" />
+    <ClCompile Include="PerceptionComponent.cpp" />
+    <ClCompile Include="PerceptionComponentDebugDraw.cpp" />
+    <ClCompile Include="PerceptionSystem.cpp" />
+    <ClCompile Include="PlayerActor.cpp" />
+    <ClCompile Include="SpriteOpaqueComponent.cpp" />
+    <ClCompile Include="AIAttackComponent.cpp" />
+    <ClCompile Include="AIChaseTargetComponent.cpp" />
+    <ClCompile Include="AIPerceptionComponent.cpp" />
+    <ClCompile Include="AITargetSelector.cpp" />
+    <ClCompile Include="BackgroundMusic.cpp" />
+    <ClCompile Include="Floor.cpp" />
+    <ClCompile Include="GameObjectContainer.cpp" />
+    <ClCompile Include="IDelayedAction.cpp" />
+    <ClCompile Include="Labyrinth.cpp" />
+    <ClCompile Include="LabyrinthBuilder.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="PlayerAttackComponent.cpp" />
+    <ClCompile Include="Settings.cpp" />
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Application.h" />
-    <ClInclude Include="Collidable.h" />
-    <ClInclude Include="DeveloperLevel.h" />
-    <ClInclude Include="Floor.h" />
-    <ClInclude Include="Game.h" />
+    <ClInclude Include="Actor.h" />
+    <ClInclude Include="ActorComponent.h" />
+    <ClInclude Include="ActorMovementComponent.h" />
+    <ClInclude Include="ActorRegisterSystem.h" />
+    <ClInclude Include="ActorSpriteDirectionComponent.h" />
+    <ClInclude Include="AIActor.h" />
+    <ClInclude Include="AIActorManagerSystem.h" />
+    <ClInclude Include="AIInputComponent.h" />
+    <ClInclude Include="ArmorBarComponent.h" />
+    <ClInclude Include="ArmorComponent.h" />
+    <ClInclude Include="AttackComponent.h" />
+    <ClInclude Include="BarComponent.h" />
+    <ClInclude Include="BlockComponent.h" />
+    <ClInclude Include="DefaultActorsSettings.h" />
     <ClInclude Include="GameLevel.h" />
-    <ClInclude Include="GameObject.h" />
-    <ClInclude Include="GameSettings.h" />
-    <ClInclude Include="GameState.h" />
-    <ClInclude Include="GameStateData.h" />
-    <ClInclude Include="GameStateGameOver.h" />
-    <ClInclude Include="GameStateGameWin.h" />
-    <ClInclude Include="GameStateMainMenu.h" />
-    <ClInclude Include="GameStatePauseMenu.h" />
-    <ClInclude Include="GameStatePlaying.h" />
-    <ClInclude Include="GameStateRecords.h" />
+    <ClInclude Include="HealthBarComponent.h" />
+    <ClInclude Include="HealthComponent.h" />
+    <ClInclude Include="KeyboardInputComponent.h" />
+    <ClInclude Include="LabyrinthElement.h" />
+    <ClInclude Include="LabyrinthExit.h" />
+    <ClInclude Include="LevelCompleteCondition.h" />
+    <ClInclude Include="LevelManager.h" />
+    <ClInclude Include="OpaqueComponent.h" />
+    <ClInclude Include="PerceptionComponent.h" />
+    <ClInclude Include="PerceptionComponentDebugDraw.h" />
+    <ClInclude Include="PerceptionSystem.h" />
+    <ClInclude Include="PlayerActor.h" />
+    <ClInclude Include="SpriteOpaqueComponent.h" />
+    <ClInclude Include="AIAttackComponent.h" />
+    <ClInclude Include="AIChaseTargetComponent.h" />
+    <ClInclude Include="AIBlackboard.h" />
+    <ClInclude Include="AIPerceptionComponent.h" />
+    <ClInclude Include="AITargetSelector.h" />
+    <ClInclude Include="BackgroundMusic.h" />
+    <ClInclude Include="Floor.h" />
+    <ClInclude Include="GameObjectContainer.h" />
     <ClInclude Include="IDelayedAction.h" />
-    <ClInclude Include="IObserver.h" />
-    <ClInclude Include="LevelDataSynchronizer.h" />
-    <ClInclude Include="LevelExit.h" />
-    <ClInclude Include="LevelLoader.h" />
-    <ClInclude Include="MazeGenerator.h" />
-    <ClInclude Include="Menu.h" />
-    <ClInclude Include="Music.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="randomizer.h" />
-    <ClInclude Include="Sprite.h" />
-    <ClInclude Include="Text.h" />
-    <ClInclude Include="Vector.h" />
+    <ClInclude Include="ISaveable.h" />
+    <ClInclude Include="Labyrinth.h" />
+    <ClInclude Include="LabyrinthBuilder.h" />
+    <ClInclude Include="PlayerAttackComponent.h" />
+    <ClInclude Include="Randomizer.h" />
+    <ClInclude Include="Settings.h" />
+    <ClInclude Include="Utility.h" />
     <ClInclude Include="Wall.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Engine\Engine.vcxproj">
+      <Project>{a526c6b0-7ea2-4b3c-aa23-6f51d4f6aff9}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets" />
 </Project>

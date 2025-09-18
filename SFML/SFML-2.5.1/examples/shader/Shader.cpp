@@ -2,22 +2,19 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include "Effect.hpp"
-#include <vector>
 #include <cmath>
+#include <vector>
+#include "Effect.hpp"
 
-
-const sf::Font* Effect::s_font = NULL;
+const sf::Font *Effect::s_font = NULL;
 
 ////////////////////////////////////////////////////////////
 // "Pixelate" fragment shader
 ////////////////////////////////////////////////////////////
 class Pixelate : public Effect
 {
-public:
-
-    Pixelate() :
-    Effect("pixelate")
+  public:
+    Pixelate() : Effect("pixelate")
     {
     }
 
@@ -41,53 +38,50 @@ public:
         m_shader.setUniform("pixel_threshold", (x + y) / 30);
     }
 
-    void onDraw(sf::RenderTarget& target, sf::RenderStates states) const
+    void onDraw(sf::RenderTarget &target, sf::RenderStates states) const
     {
         states.shader = &m_shader;
         target.draw(m_sprite, states);
     }
 
-private:
-
+  private:
     sf::Texture m_texture;
     sf::Sprite m_sprite;
     sf::Shader m_shader;
 };
-
 
 ////////////////////////////////////////////////////////////
 // "Wave" vertex shader + "blur" fragment shader
 ////////////////////////////////////////////////////////////
 class WaveBlur : public Effect
 {
-public:
-
-    WaveBlur() :
-    Effect("wave + blur")
+  public:
+    WaveBlur() : Effect("wave + blur")
     {
     }
 
     bool onLoad()
     {
         // Create the text
-        m_text.setString("Praesent suscipit augue in velit pulvinar hendrerit varius purus aliquam.\n"
-                         "Mauris mi odio, bibendum quis fringilla a, laoreet vel orci. Proin vitae vulputate tortor.\n"
-                         "Praesent cursus ultrices justo, ut feugiat ante vehicula quis.\n"
-                         "Donec fringilla scelerisque mauris et viverra.\n"
-                         "Maecenas adipiscing ornare scelerisque. Nullam at libero elit.\n"
-                         "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.\n"
-                         "Nullam leo urna, tincidunt id semper eget, ultricies sed mi.\n"
-                         "Morbi mauris massa, commodo id dignissim vel, lobortis et elit.\n"
-                         "Fusce vel libero sed neque scelerisque venenatis.\n"
-                         "Integer mattis tincidunt quam vitae iaculis.\n"
-                         "Vivamus fringilla sem non velit venenatis fermentum.\n"
-                         "Vivamus varius tincidunt nisi id vehicula.\n"
-                         "Integer ullamcorper, enim vitae euismod rutrum, massa nisl semper ipsum,\n"
-                         "vestibulum sodales sem ante in massa.\n"
-                         "Vestibulum in augue non felis convallis viverra.\n"
-                         "Mauris ultricies dolor sed massa convallis sed aliquet augue fringilla.\n"
-                         "Duis erat eros, porta in accumsan in, blandit quis sem.\n"
-                         "In hac habitasse platea dictumst. Etiam fringilla est id odio dapibus sit amet semper dui laoreet.\n");
+        m_text.setString(
+            "Praesent suscipit augue in velit pulvinar hendrerit varius purus aliquam.\n"
+            "Mauris mi odio, bibendum quis fringilla a, laoreet vel orci. Proin vitae vulputate tortor.\n"
+            "Praesent cursus ultrices justo, ut feugiat ante vehicula quis.\n"
+            "Donec fringilla scelerisque mauris et viverra.\n"
+            "Maecenas adipiscing ornare scelerisque. Nullam at libero elit.\n"
+            "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.\n"
+            "Nullam leo urna, tincidunt id semper eget, ultricies sed mi.\n"
+            "Morbi mauris massa, commodo id dignissim vel, lobortis et elit.\n"
+            "Fusce vel libero sed neque scelerisque venenatis.\n"
+            "Integer mattis tincidunt quam vitae iaculis.\n"
+            "Vivamus fringilla sem non velit venenatis fermentum.\n"
+            "Vivamus varius tincidunt nisi id vehicula.\n"
+            "Integer ullamcorper, enim vitae euismod rutrum, massa nisl semper ipsum,\n"
+            "vestibulum sodales sem ante in massa.\n"
+            "Vestibulum in augue non felis convallis viverra.\n"
+            "Mauris ultricies dolor sed massa convallis sed aliquet augue fringilla.\n"
+            "Duis erat eros, porta in accumsan in, blandit quis sem.\n"
+            "In hac habitasse platea dictumst. Etiam fringilla est id odio dapibus sit amet semper dui laoreet.\n");
         m_text.setFont(getFont());
         m_text.setCharacterSize(22);
         m_text.setPosition(30, 20);
@@ -106,28 +100,24 @@ public:
         m_shader.setUniform("blur_radius", (x + y) * 0.008f);
     }
 
-    void onDraw(sf::RenderTarget& target, sf::RenderStates states) const
+    void onDraw(sf::RenderTarget &target, sf::RenderStates states) const
     {
         states.shader = &m_shader;
         target.draw(m_text, states);
     }
 
-private:
-
+  private:
     sf::Text m_text;
     sf::Shader m_shader;
 };
-
 
 ////////////////////////////////////////////////////////////
 // "Storm" vertex shader + "blink" fragment shader
 ////////////////////////////////////////////////////////////
 class StormBlink : public Effect
 {
-public:
-
-    StormBlink() :
-    Effect("storm + blink")
+  public:
+    StormBlink() : Effect("storm + blink")
     {
     }
 
@@ -161,28 +151,24 @@ public:
         m_shader.setUniform("blink_alpha", 0.5f + std::cos(time * 3) * 0.25f);
     }
 
-    void onDraw(sf::RenderTarget& target, sf::RenderStates states) const
+    void onDraw(sf::RenderTarget &target, sf::RenderStates states) const
     {
         states.shader = &m_shader;
         target.draw(m_points, states);
     }
 
-private:
-
+  private:
     sf::VertexArray m_points;
     sf::Shader m_shader;
 };
-
 
 ////////////////////////////////////////////////////////////
 // "Edge" post-effect fragment shader
 ////////////////////////////////////////////////////////////
 class Edge : public Effect
 {
-public:
-
-    Edge() :
-    Effect("edge post-effect")
+  public:
+    Edge() : Effect("edge post-effect")
     {
     }
 
@@ -241,14 +227,13 @@ public:
         m_surface.display();
     }
 
-    void onDraw(sf::RenderTarget& target, sf::RenderStates states) const
+    void onDraw(sf::RenderTarget &target, sf::RenderStates states) const
     {
         states.shader = &m_shader;
         target.draw(sf::Sprite(m_surface.getTexture()), states);
     }
 
-private:
-
+  private:
     sf::RenderTexture m_surface;
     sf::Texture m_backgroundTexture;
     sf::Texture m_entityTexture;
@@ -257,17 +242,13 @@ private:
     sf::Shader m_shader;
 };
 
-
 ////////////////////////////////////////////////////////////
 // "Geometry" geometry shader example
 ////////////////////////////////////////////////////////////
 class Geometry : public Effect
 {
-public:
-
-    Geometry() :
-        Effect("geometry shader billboards"),
-        m_pointCloud(sf::Points, 10000)
+  public:
+    Geometry() : Effect("geometry shader billboards"), m_pointCloud(sf::Points, 10000)
     {
     }
 
@@ -317,7 +298,7 @@ public:
         m_shader.setUniform("size", sf::Vector2f(size, size));
     }
 
-    void onDraw(sf::RenderTarget& target, sf::RenderStates states) const
+    void onDraw(sf::RenderTarget &target, sf::RenderStates states) const
     {
         // Prepare the render state
         states.shader = &m_shader;
@@ -328,14 +309,12 @@ public:
         target.draw(m_pointCloud, states);
     }
 
-private:
-
+  private:
     sf::Texture m_logoTexture;
     sf::Transform m_transform;
     sf::Shader m_shader;
     sf::VertexArray m_pointCloud;
 };
-
 
 ////////////////////////////////////////////////////////////
 /// Entry point of application
@@ -346,8 +325,7 @@ private:
 int main()
 {
     // Create the main window
-    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Shader",
-                            sf::Style::Titlebar | sf::Style::Close);
+    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Shader", sf::Style::Titlebar | sf::Style::Close);
     window.setVerticalSyncEnabled(true);
 
     // Load the application font and pass it to the Effect class
@@ -357,7 +335,7 @@ int main()
     Effect::setFont(font);
 
     // Create the effects
-    std::vector<Effect*> effects;
+    std::vector<Effect *> effects;
     effects.push_back(new Pixelate);
     effects.push_back(new WaveBlur);
     effects.push_back(new StormBlink);
@@ -403,31 +381,31 @@ int main()
             {
                 switch (event.key.code)
                 {
-                    // Escape key: exit
-                    case sf::Keyboard::Escape:
-                        window.close();
-                        break;
+                // Escape key: exit
+                case sf::Keyboard::Escape:
+                    window.close();
+                    break;
 
-                    // Left arrow key: previous shader
-                    case sf::Keyboard::Left:
-                        if (current == 0)
-                            current = effects.size() - 1;
-                        else
-                            current--;
-                        description.setString("Current effect: " + effects[current]->getName());
-                        break;
+                // Left arrow key: previous shader
+                case sf::Keyboard::Left:
+                    if (current == 0)
+                        current = effects.size() - 1;
+                    else
+                        current--;
+                    description.setString("Current effect: " + effects[current]->getName());
+                    break;
 
-                    // Right arrow key: next shader
-                    case sf::Keyboard::Right:
-                        if (current == effects.size() - 1)
-                            current = 0;
-                        else
-                            current++;
-                        description.setString("Current effect: " + effects[current]->getName());
-                        break;
+                // Right arrow key: next shader
+                case sf::Keyboard::Right:
+                    if (current == effects.size() - 1)
+                        current = 0;
+                    else
+                        current++;
+                    description.setString("Current effect: " + effects[current]->getName());
+                    break;
 
-                    default:
-                        break;
+                default:
+                    break;
                 }
             }
         }

@@ -1,0 +1,32 @@
+﻿---
+BasedOnStyle: Microsoft
+ColumnLimit: '120'
+IncludeBlocks: Preserve
+IndentWidth: '4'
+SortIncludes: 'true'
+SpacesInParentheses: 'false'
+IncludeCategories:
+  - Regex:           '^"pch\.h"'
+    Priority:        -1
+    SortPriority:    0
+  - Regex:           '^<ext/.*\.h>'
+    Priority:        2
+    SortPriority:    0
+    CaseSensitive:   false
+  - Regex:           '^<.*\.h>'
+    Priority:        1
+    SortPriority:    0
+    CaseSensitive:   false
+  - Regex:           '^<.*'
+    Priority:        2
+    SortPriority:    0
+    CaseSensitive:   false
+  - Regex:           '"SFML/"*'
+    Priority:        3
+    SortPriority:    0
+    CaseSensitive:   false
+  - Regex:           '.*'
+    Priority:        4
+    SortPriority:    0
+    CaseSensitive:   false
+...

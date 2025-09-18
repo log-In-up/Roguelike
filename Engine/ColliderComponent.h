@@ -1,47 +1,42 @@
 #pragma once
 #include <functional>
-#include <SFML/Graphics.hpp>
 #include <vector>
+
+#include <SFML/Graphics/Rect.hpp>
 
 #include "Collision.h"
 #include "Component.h"
-#include "PhysicsSystem.h"
 #include "Trigger.h"
 
 namespace GameEngine
 {
-	class ColliderComponent : public Component
-	{
-	protected:
-		sf::FloatRect bounds;
+class ColliderComponent : public Component
+{
+  public:
+    friend class PhysicsSystem;
 
-		std::vector<std::function<void(Collision)>> onCollisionActions;
-		std::vector<std::function<void(Trigger)>> onTriggerEnterActions;
-		std::vector<std::function<void(Trigger)>> onTriggerExitActions;
+    explicit ColliderComponent(GameObject *gameObject);
 
-		bool isTrigger = false;
-	public:
-		ColliderComponent(GameObject* gameObject);
+    void Update(float deltaTime) override = 0;
 
-		virtual void Render(sf::RenderWindow& window) = 0;
-		virtual void Update(float deltaTime) = 0;
+    void SetTrigger(bool newIsTrigger);
+    void SubscribeCollision(std::function<void(Collision)> onCollisionAction);
+    void SubscribeTriggerEntered(std::function<void(Trigger)> onTriggerEntered);
+    void SubscribeTriggerExit(std::function<void(Trigger)> onTriggerExit);
+    void UnsubscribeCollision(std::function<void(Collision)> onCollisionAction);
+    void UnsubscribeTriggerEntered(std::function<void(Trigger)> onTriggerEntered);
+    void UnsubscribeTriggerExit(std::function<void(Trigger)> onTriggerExit);
 
-		void SetTrigger(bool newIsTrigger);
-		void SubscribeCollision(std::function<void(Collision)> onCollisionAction);
-		void SubscribeTriggerEnter(std::function<void(Trigger)> onTriggerEnterAction);
-		void SubscribeTriggerExit(std::function<void(Trigger)> onTriggerExitAction);
-		void UnsubscribeAllCollision();
-		void UnsubscribeAllTriggerEnters();
-		void UnsubscribeAllTriggerExits();
-		void UnsubscribeCollision(std::function<void(Collision)> onCollisionAction);
-		void UnsubscribeTriggerEnter(std::function<void(Trigger)> onTriggerEnterAction);
-		void UnsubscribeTriggerExit(std::function<void(Trigger)> onTriggerExitAction);
+  protected:
+    void OnCollision(Collision collision);
+    void OnTriggerEntered(Trigger trigger);
+    void OnTriggerExit(Trigger trigger);
 
-		friend class PhysicsSystem;
+    std::vector<std::function<void(Collision)>> onCollisionActions;
+    std::vector<std::function<void(Trigger)>> onTriggerEnteredActions;
+    std::vector<std::function<void(Trigger)>> onTriggerExitActions;
 
-	protected:
-		void OnCollision(Collision collision);
-		void OnTriggerEnter(Trigger trigger);
-		void OnTriggerExit(Trigger trigger);
-	};
-}
+    sf::FloatRect bounds;
+    bool isTrigger = false;
+};
+} // namespace GameEngine

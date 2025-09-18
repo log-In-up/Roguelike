@@ -1,17 +1,23 @@
 #include "Floor.h"
 
-using namespace GameEngine;
+#include "LabyrinthElement.h"
+#include "ResourceSystem.h"
+#include "Settings.h"
+#include "SpriteRendererComponent.h"
+#include "TransformComponent.h"
+#include "Vector.h"
 
 namespace Roguelike
 {
-	Floor::Floor(const Vector2Df& position, int textureMapIndex)
-	{
-		gameObject = GameWorld::Instance()->CreateGameObject("Floor");
-		auto transform = gameObject->GetComponent<TransformComponent>();
-		transform->SetWorldPosition(position);
+Floor::Floor(GameEngine::Vector2Df position, int textureIndex, GameEngine::Vector2Di size) : LabyrinthElement("Floor")
+{
+    auto *transform = gameObject->GetComponent<GameEngine::TransformComponent>();
+    transform->SetWorldPosition(position);
 
-		auto renderer = gameObject->AddComponent<SpriteRendererComponent>();
-		renderer->SetTexture(*ResourceSystem::Instance()->GetTextureMapElementShared("level_floors", textureMapIndex));
-		renderer->SetPixelSize(128, 128);
-	}
+    auto sprite =
+        gameObject->AddComponent<GameEngine::SpriteRendererComponent>(static_cast<int>(Settings::RenderLayers::Floor));
+    sprite->SetTexture(
+        *GameEngine::ResourceSystem::Instance()->GetTextureMapElementShared("FloorTextures", textureIndex));
+    sprite->SetPixelSize(size.x, size.y);
 }
+} // namespace Roguelike

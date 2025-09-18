@@ -1,26 +1,12 @@
 #pragma once
 namespace GameEngine
 {
-	class ColliderComponent;
-
-	struct Trigger
-	{
-	private:
-		ColliderComponent* first;
-		ColliderComponent* second;
-	public:
-		ColliderComponent& GetFirstComponent()
-		{
-			return *first;
-		}
-
-		ColliderComponent& GetSecondComponent()
-		{
-			return *second;
-		}
-	public:
-		Trigger(ColliderComponent* newFirst, ColliderComponent* newSecond) : first(newFirst), second(newSecond)
-		{
-		};
-	};
-}
+class ColliderComponent;
+struct Trigger
+{
+  public:
+    Trigger(ColliderComponent *first, ColliderComponent *second) : first(first), second(second) {};
+    ColliderComponent *first;
+    ColliderComponent *second;
+};
+} // namespace GameEngine
