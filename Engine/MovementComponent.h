@@ -1,25 +1,27 @@
 #pragma once
-#include "GameObject.h"
-#include "InputComponent.h"
+#include "Component.h"
+#include "TransformComponent.h"
+#include "Vector.h"
 
 namespace GameEngine
 {
-	class MovementComponent : public Component
-	{
-	private:
-		InputComponent* input;
-		TransformComponent* transform;
+class MovementComponent : public Component
+{
+  public:
+    explicit MovementComponent(GameObject *gameObject);
+    MovementComponent(GameObject *gameObject, const float speed);
 
-		float speed = 0;
-		Vector2Df previousPosition = { 0, 0 };
-		Vector2Df acceleration = { 0, 0 };
-	public:
-		MovementComponent(GameObject* gameObject);
+    void Update(float deltaTime) override;
 
-		float GetAccelerationSquared() const;
-		float GetSpeed() const;
-		void Render(sf::RenderWindow& window) override;
-		void SetSpeed(float newSpeed);
-		void Update(float deltaTime) override;
-	};
-}
+    float GetAccelerationSquared() const;
+    float GetSpeed() const;
+    void SetSpeed(float newSpeed);
+
+  private:
+    TransformComponent *transform;
+
+    float speed = 0.0F;
+    Vector2Df previosPosition = {0.0F, 0.0F};
+    Vector2Df acceleration = {0.0F, 0.0F};
+};
+} // namespace GameEngine

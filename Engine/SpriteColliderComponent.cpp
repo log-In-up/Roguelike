@@ -1,49 +1,53 @@
 #include "pch.h"
+
 #include "SpriteColliderComponent.h"
+
+#include <SFML/Graphics/Color.hpp>
+#include <SFML/Graphics/RectangleShape.hpp>
+
+#include "GameObject.h"
+#include "IRenderable.h"
+#include "Logger.h"
+#include "PhysicsSystem.h"
+#include "RenderSystem.h"
+#include "SpriteRendererComponent.h"
 
 namespace GameEngine
 {
-	SpriteColliderComponent::SpriteColliderComponent(GameObject* gameObject) : ColliderComponent(gameObject)
-	{
-		auto spriteRenderer = gameObject->GetComponent<SpriteRendererComponent>();
-		if (spriteRenderer == nullptr)
-		{
-			std::cout << "SpriteRenderer required to SpriteCollider." << std::endl;
-			gameObject->RemoveComponent(this);
-			return;
-		}
+SpriteColliderComponent::SpriteColliderComponent(GameObject *gameObject, int renderLayer)
+    : ColliderComponent(gameObject), IRenderable(renderLayer), sprite(nullptr)
+{
+    auto *spriteRenderer = gameObject->GetComponent<SpriteRendererComponent>();
+    if (spriteRenderer == nullptr)
+    {
+        LOG_ERROR("SpriteRendererComponent required to SpriteColliderComponent.");
+        gameObject->RemoveComponent(this);
+        return;
+    }
 
-		sprite = gameObject->GetComponent<SpriteRendererComponent>()->GetSprite();
-		PhysicsSystem::Instance()->Subscribe(this);
-	}
-
-	SpriteColliderComponent::~SpriteColliderComponent()
-	{
-		if (&bounds != nullptr)
-		{
-			std::destroy_at(&bounds);
-		}
-		PhysicsSystem::Instance()->Unsubscribe(this);
-	}
-
-	void SpriteColliderComponent::Render(sf::RenderWindow& window)
-	{
-#ifdef NDEBUG
-		// nondebug
-#else
-		// debug code
-		sf::RectangleShape rectangle(sf::Vector2f(bounds.width, bounds.height));
-		rectangle.setPosition(bounds.left, bounds.top);
-		rectangle.setFillColor(sf::Color::Transparent);
-		rectangle.setOutlineColor(sf::Color::White);
-		rectangle.setOutlineThickness(4);
-
-		RenderSystem::Instance()->Render(rectangle);
-#endif
-	}
-
-	void SpriteColliderComponent::Update(float deltaTime)
-	{
-		bounds = sprite->getGlobalBounds();
-	}
+    sprite = spriteRenderer->GetSprite();
+    PhysicsSystem::Instance()->Subscribe(this);
 }
+
+SpriteColliderComponent::~SpriteColliderComponent()
+{
+    PhysicsSystem::Instance()->Unsubscribe(this);
+}
+
+void SpriteColliderComponent::Update(float deltaTime)
+{
+    bounds = sprite->getGlobalBounds();
+}
+
+void SpriteColliderComponent::Render()
+{
+    constexpr float outlineThickness = 4.0F;
+    sf::RectangleShape rectangle(sf::Vector2f(bounds.width, bounds.height));
+    rectangle.setFillColor(sf::Color::Transparent);
+    rectangle.setPosition(bounds.left, bounds.top);
+    rectangle.setOutlineColor(sf::Color::White);
+    rectangle.setOutlineThickness(outlineThickness);
+
+    RenderSystem::Instance()->Render(rectangle, layer);
+}
+} // namespace GameEngine

@@ -1,32 +1,35 @@
 #pragma once
-#include <iostream>
 #include <map>
+#include <vector>
 
-#include "ColliderComponent.h"
-#include "RigidbodyComponent.h"
-#include "Vector.h"
+#include "Collision.h"
+#include "IFixedUpdateSystem.h"
+#include "Trigger.h"
 
 namespace GameEngine
 {
-	class PhysicsSystem
-	{
-	private:
-		std::vector<ColliderComponent*> colliders;
-		std::map<ColliderComponent*, ColliderComponent*> triggersEnteredPair;
+class ColliderComponent;
+class PhysicsSystem : public IFixedUpdateSystem
+{
+  public:
+    static PhysicsSystem *Instance();
 
-		float fixedDeltaTime = 0.02f;
-	public:
-		static PhysicsSystem* Instance();
+    void Update() override;
 
-		float GetFixedDeltaTime() const;
-		void Subscribe(ColliderComponent* collider);
-		void Unsubscribe(ColliderComponent* collider);
-		void Update();
-	private:
-		PhysicsSystem() {}
-		~PhysicsSystem() {}
+    void Subscribe(ColliderComponent *collider);
+    void Unsubscribe(ColliderComponent *collider);
 
-		PhysicsSystem(PhysicsSystem const&) = delete;
-		PhysicsSystem& operator= (PhysicsSystem const&) = delete;
-	};
-}
+  private:
+    PhysicsSystem() {};
+    ~PhysicsSystem() {};
+
+    PhysicsSystem(PhysicsSystem const &) = delete;
+    PhysicsSystem &operator=(PhysicsSystem const &) = delete;
+
+    static void ProcessCollision(Collision *collision);
+    void ProcessTriggerEnter(Trigger *trigger);
+
+    std::vector<ColliderComponent *> colliders;
+    std::multimap<ColliderComponent *, ColliderComponent *> triggersEnteredPair;
+};
+} // namespace GameEngine

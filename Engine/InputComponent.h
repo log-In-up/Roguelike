@@ -1,21 +1,27 @@
 #pragma once
-#include <SFML/Window.hpp>
-
 #include "Component.h"
+#include "IObserver.h"
 
 namespace GameEngine
 {
-	class InputComponent : public Component
-	{
-	private:
-		float horizontalAxis = 0.f;
-		float verticalAxis = 0.f;
-	public:
-		InputComponent(GameObject* gameObject);
+class InputComponent : public Component, public IObservable
+{
+  public:
+    explicit InputComponent(GameObject *gameObject);
 
-		float GetHorizontalAxis() const;
-		float GetVerticalAxis() const;
-		void Render(sf::RenderWindow& window) override;
-		void Update(float deltaTime) override;
-	};
-}
+    void Update(float deltaTime) override = 0;
+
+    bool GetAttack() const;
+    bool GetBlock() const;
+    bool GetLevelTransfer() const;
+    float GetHorizontalAxis() const;
+    float GetVerticalAxis() const;
+
+  protected:
+    float horizontalAxis = 0.0F;
+    float verticalAxis = 0.0F;
+    bool attack = false;
+    bool block = false;
+    bool levelTransfer = false;
+};
+} // namespace GameEngine

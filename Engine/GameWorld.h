@@ -1,35 +1,45 @@
 #pragma once
+#include <memory>
+#include <string>
+#include <unordered_map>
+#include <vector>
+
 #include "GameObject.h"
-#include "PhysicsSystem.h"
+#include "IFixedUpdateSystem.h"
 
 namespace GameEngine
 {
-	class GameWorld
-	{
-	private:
-		std::vector<GameObject*> gameObjects = {};
-		std::vector<GameObject*> markedToDestroyGameObjects = {};
+class GameWorld
+{
+  public:
+    static GameWorld *Instance();
 
-		float fixedCounter = 0.f;
-	public:
-		static GameWorld* Instance();
+    GameObject *CreateGameObject();
+    GameObject *CreateGameObject(std::string name);
+    void Clear();
+    void ClearImmediate();
+    void DestroyGameObject(GameObject *gameObject);
+    void DestroyGameObject(std::shared_ptr<GameObject> gameObject);
+    void FixedUpdate(float deltaTime);
+    void LateUpdate();
+    void Print() const;
+    void RegisterFixedUpdateSytem(IFixedUpdateSystem *system);
+    void Render();
+    void UnRegisterFixedUpdateSytem(IFixedUpdateSystem *system);
+    void Update(float deltaTime);
 
-		GameObject* CreateGameObject();
-		GameObject* CreateGameObject(std::string name);
-		void Clear();
-		void DestroyGameObject(GameObject* gameObject);
-		void FixedUpdate(float deltaTime);
-		void LateUpdate();
-		void Print() const;
-		void Render(sf::RenderWindow& window);
-		void Update(float deltaTime);
-	private:
-		GameWorld() {}
-		~GameWorld() {}
+  private:
+    GameWorld() {};
+    ~GameWorld() {};
 
-		GameWorld(GameWorld const&) = delete;
-		GameWorld& operator= (GameWorld const&) = delete;
+    GameWorld(GameWorld const &) = delete;
+    GameWorld &operator=(GameWorld const &) = delete;
 
-		void DestroyGameObjectImmediate(GameObject* gameObject);
-	};
-}
+    std::unordered_map<IFixedUpdateSystem *, float> fixedUpdateSystems;
+
+    std::vector<std::shared_ptr<GameObject>> gameObjects;
+    std::vector<std::shared_ptr<GameObject>> markedToDestroyGameObjects;
+
+    void DestroyGameObjectImmediate(std::shared_ptr<GameObject> gameObject);
+};
+} // namespace GameEngine

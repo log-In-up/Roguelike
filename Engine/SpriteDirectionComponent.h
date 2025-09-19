@@ -1,19 +1,21 @@
 #pragma once
-#include "GameObject.h"
+#include <memory>
+
+#include "Component.h"
 #include "InputComponent.h"
 #include "SpriteRendererComponent.h"
 
 namespace GameEngine
 {
-	class SpriteDirectionComponent : public Component
-	{
-	private:
-		InputComponent* input;
-		SpriteRendererComponent* spriteRenderer;
-	public:
-		SpriteDirectionComponent(GameObject* gameObject);
+class SpriteDirectionComponent : public Component
+{
+  public:
+    explicit SpriteDirectionComponent(GameObject *gameObject);
 
-		void Render(sf::RenderWindow& window) override;
-		void Update(float deltaTime) override;
-	};
-}
+    void Update(float deltaTime) override;
+
+  private:
+    std::weak_ptr<SpriteRendererComponent> rendererPointer;
+    std::weak_ptr<InputComponent> inputPointer;
+};
+} // namespace GameEngine

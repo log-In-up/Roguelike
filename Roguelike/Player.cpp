@@ -1,63 +1,76 @@
-#include <ResourceSystem.h>
-#include <SpriteColliderComponent.h>
-#include <MovementComponent.h>
-#include <SpriteDirectionComponent.h>
-#include <SpriteMovementAnimationComponent.h>
-#include <StatsComponent.h>
-#include <AttackComponent.h>
-
 #include "Player.h"
-#include "GameSettings.h"
+
+#include "ActorComponent.h"
+#include "ArmorBarComponent.h"
+#include "ArmorComponent.h"
+#include "AttackComponent.h"
+#include "BarComponent.h"
+#include "BlockComponent.h"
+#include "CameraComponent.h"
+#include "GameObjectContainer.h"
+#include "HealthBarComponent.h"
+#include "HealthComponent.h"
+#include "KeyboardInputComponent.h"
+#include "MovementComponent.h"
+#include "PlayerAttackComponent.h"
+#include "RenderSystem.h"
+#include "ResourceSystem.h"
+#include "RigidBodyComponent.h"
+#include "Settings.h"
+#include "SpriteAnimationComponent.h"
+#include "SpriteColliderComponent.h"
+#include "SpriteDirectionComponent.h"
+#include "SpriteRendererComponent.h"
 
 namespace Roguelike
 {
-	Player::Player(const GameEngine::Vector2Df& position, const PlayerData& data)
-		: gameObject(GameEngine::GameWorld::Instance()->CreateGameObject("Player"))
-	{
-		auto transform = gameObject->GetComponent<GameEngine::TransformComponent>();
-		transform->SetWorldPosition(position);
+Player::Player() : GameObjectContainer("Player")
+{
+    auto *settings = Settings::Instance();
 
-		auto renderer = gameObject->AddComponent<GameEngine::SpriteRendererComponent>();
-		renderer->SetTexture(*GameEngine::ResourceSystem::Instance()->GetTextureMapElementShared("player", 0));
-		renderer->SetPixelSize(100, 100);
+    auto playerRender = gameObject->AddComponent<MaxrEngine::SpriteRendererComponent>();
+    playerRender->SetTexture(*MaxrEngine::ResourceSystem::Instance()->GetTextureMapElementShared("PlayerTextures", 0),
+                             false);
+    playerRender->SetPixelSize(settings->playerSize, settings->playerSize);
 
-		auto camera = gameObject->AddComponent<GameEngine::CameraComponent>(SETTINGS.SCREEN_WIDTH, SETTINGS.SCREEN_HEIGHT);
+    auto playerCamera = gameObject->AddComponent<MaxrEngine::CameraComponent>();
+    playerCamera->SetWindow(&MaxrEngine::RenderSystem::Instance()->GetMainWindow());
+    playerCamera->SetBaseResolution(settings->screenWidth, settings->screenHeight);
 
-		auto input = gameObject->AddComponent<GameEngine::InputComponent>();
+    auto input = gameObject->AddComponent<MaxrEngine::KeyboardInputComponent>();
 
-		auto movement = gameObject->AddComponent<GameEngine::MovementComponent>();
-		movement->SetSpeed(400.f);
+    auto playerMovement = gameObject->AddComponent<MaxrEngine::MovementComponent>();
+    playerMovement->SetSpeed(settings->playerSpeed);
 
-		auto spriteDirection = gameObject->AddComponent<GameEngine::SpriteDirectionComponent>();
+    auto body = gameObject->AddComponent<MaxrEngine::RigidBodyComponent>();
+    body->SetKinematic(false);
 
-		auto rigidbody = gameObject->AddComponent<GameEngine::RigidbodyComponent>();
-		rigidbody->SetKinematic(false);
+    gameObject->AddComponent<MaxrEngine::SpriteColliderComponent>();
 
-		auto collider = gameObject->AddComponent<GameEngine::SpriteColliderComponent>();
+    auto health = gameObject->AddComponent<HealthComponent>(settings->playerHealth);
+    auto healthBar = gameObject->AddComponent<HealthBarComponent>(settings->healthBarParameters);
+    healthBar->SetHealthComponent(health);
 
-		auto animator = gameObject->AddComponent<GameEngine::SpriteMovementAnimationComponent>();
-		animator->Initialize("player", 6.f);
+    const ArmorComponent::Parameters armorParameters = {.maxArmorPoints = settings->playerHealth,
+                                                        .damageReduction = settings->armorDamageReduction};
+    auto armor = gameObject->AddComponent<ArmorComponent>(armorParameters);
+    auto armorBar = gameObject->AddComponent<ArmorBarComponent>(settings->armorBarParameters);
+    armorBar->SetArmorComponent(armor);
+    ;
 
-		auto statsComponent = gameObject->AddComponent<GameEngine::StatsComponent>(data.currentHealth, data.maxHealth, data.armor);
+    auto actorComponent = gameObject->AddComponent<ActorComponent>();
+    actorComponent->SetGroupID(ActorsGroups::PlayerGroup);
 
-		auto attackComponent = gameObject->AddComponent<GameEngine::AttackComponent>(10.f);
-	}
+    auto attackComponent = gameObject->AddComponent<PlayerAttackComponent>(settings->playerAtackParameters);
+    input->AddObserver(attackComponent);
 
-	PlayerData Player::GetPlayerData()
-	{
-		auto statsComponent = gameObject->GetComponent<GameEngine::StatsComponent>();
+    auto blockComponent = gameObject->AddComponent<BlockComponent>(settings->playerBlockParameters);
 
-		PlayerData value{};
-
-		if (statsComponent == nullptr)
-		{
-			return value;
-		}
-
-		value.armor = statsComponent->GetArmor();
-		value.currentHealth = statsComponent->GetCurrentHealth();
-		value.maxHealth = statsComponent->GetMaxHealth();
-
-		return value;
-	}
+    auto spriteDirection = gameObject->AddComponent<MaxrEngine::SpriteDirectionComponent>();
+    auto animationComponent = gameObject->AddComponent<MaxrEngine::SpriteAnimationComponent>();
+    animationComponent->AddAnimation("Idle", settings->playerIdleAnimation, false);
+    animationComponent->AddAnimation("Walk", settings->playerWalkingAnimation, false);
+    animationComponent->AddAnimation("Attack windup", settings->playerAttackWindupAnimation, false);
+    animationComponent->AddAnimation("Attack", settings->playerAttackAnimation, false);
 }
+} // namespace Roguelike

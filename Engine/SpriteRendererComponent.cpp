@@ -1,76 +1,98 @@
 #include "pch.h"
-#include "RenderSystem.h"
+
 #include "SpriteRendererComponent.h"
+
+#include <SFML/Graphics/Sprite.hpp>
+
+#include "Component.h"
+#include "GameObject.h"
+#include "IRenderable.h"
+#include "RenderSystem.h"
 #include "TransformComponent.h"
+#include "Vector.h"
 
 namespace GameEngine
 {
-	SpriteRendererComponent::SpriteRendererComponent(GameObject* gameObject) : Component(gameObject)
-	{
-		sprite = new sf::Sprite();
-		scale = { 1, -1 };
-		sprite->setScale({ 1, -1 });
-		transform = gameObject->GetComponent<TransformComponent>();
-	}
-
-	SpriteRendererComponent::~SpriteRendererComponent()
-	{
-		if (sprite != nullptr)
-		{
-			delete sprite;
-		}
-	}
-
-	const sf::Sprite* SpriteRendererComponent::GetSprite() const
-	{
-		return sprite;
-	}
-
-	void SpriteRendererComponent::FlipX(bool flip)
-	{
-		if (flip != isFlipX)
-		{
-			scale = { -scale.x, scale.y };
-			isFlipX = flip;
-		}
-	}
-
-	void SpriteRendererComponent::FlipY(bool flip)
-	{
-		if (flip != isFlipY)
-		{
-			scale = { scale.x, -scale.y };
-			isFlipY = flip;
-		}
-	}
-
-	void SpriteRendererComponent::Render(sf::RenderWindow& window)
-	{
-		if (sprite != nullptr)
-		{
-			sprite->setPosition(Convert<sf::Vector2f, Vector2Df>(transform->GetWorldPosition()));
-			sprite->setRotation(transform->GetWorldRotation());
-
-			auto transformScale = Convert<sf::Vector2f, Vector2Df>(transform->GetWorldScale());
-			sprite->setScale({ scale.x * transformScale.x, scale.y * transformScale.y });
-			RenderSystem::Instance()->Render(*sprite);
-		}
-	}
-
-	void SpriteRendererComponent::SetPixelSize(int newWidth, int newHeight)
-	{
-		auto originalSize = sprite->getTexture()->getSize();
-		scale = { (float)newWidth / (float)originalSize.x, -(float)newHeight / (float)originalSize.y };
-	}
-
-	void SpriteRendererComponent::SetTexture(const sf::Texture& newTexture)
-	{
-		sprite->setTexture(newTexture);
-		auto textureSize = sprite->getTexture()->getSize();
-		sprite->setOrigin({ 0.5f * textureSize.x, 0.5f * textureSize.y });
-	}
-
-	void SpriteRendererComponent::Update(float deltaTime)
-	{
-	}
+GameEngine::SpriteRendererComponent::SpriteRendererComponent(GameObject *gameObject, const int layer)
+    : Component(gameObject), IRenderable(layer)
+{
+    sprite = new sf::Sprite();
+    scale = {1, -1};
+    sprite->setScale({1, -1});
+    transform = gameObject->GetComponent<TransformComponent>();
 }
+
+SpriteRendererComponent::~SpriteRendererComponent()
+{
+    delete sprite;
+}
+
+void SpriteRendererComponent::Render()
+{
+    if (sprite != nullptr)
+    {
+        sprite->setPosition(Convert<sf::Vector2f>(transform->GetWorldPosition()));
+        sprite->setRotation(transform->GetWorldRotation());
+        sprite->setScale(Convert<sf::Vector2f>(scale * transform->GetWorldScale()));
+        RenderSystem::Instance()->Render(*sprite, layer);
+    }
+}
+
+void SpriteRendererComponent::Update(float deltaTime)
+{
+}
+
+bool SpriteRendererComponent::IsTextureRightDirected() const
+{
+    return isTextureRightDirected;
+}
+
+const sf::Sprite *SpriteRendererComponent::GetSprite() const
+{
+    return sprite;
+}
+
+void SpriteRendererComponent::FlipX(bool flip)
+{
+    if (flip != isFlipX)
+    {
+        scale.x *= -1;
+        isFlipX = flip;
+    }
+}
+
+void SpriteRendererComponent::FlipY(bool flip)
+{
+    if (flip != isFlipY)
+    {
+        scale.y *= -1;
+        isFlipY = flip;
+    }
+}
+
+void SpriteRendererComponent::SetColor(const sf::Color newColor)
+{
+    sprite->setColor(newColor);
+}
+
+void SpriteRendererComponent::SetPixelSize(const Vector2Di &size)
+{
+    SetPixelSize(size.x, size.y);
+}
+
+void SpriteRendererComponent::SetPixelSize(int newWidth, int newHeight)
+{
+    auto originalSize = Convert<sf::Vector2f>(sprite->getTexture()->getSize());
+    scale = {static_cast<float>(newWidth) / originalSize.x, -static_cast<float>(newHeight) / originalSize.y};
+}
+
+void SpriteRendererComponent::SetTexture(const sf::Texture &newTexture, const bool newIsTextureRightDirected)
+{
+    sprite->setTexture(newTexture);
+    auto textureSize = Convert<sf::Vector2f>(sprite->getTexture()->getSize());
+    constexpr float half = 0.5F;
+    const sf::Vector2f textureCenter = {half * textureSize.x, half * textureSize.y};
+    sprite->setOrigin(textureCenter);
+    isTextureRightDirected = newIsTextureRightDirected;
+}
+} // namespace GameEngine

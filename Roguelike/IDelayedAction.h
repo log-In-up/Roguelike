@@ -1,41 +1,17 @@
 #pragma once
-#include <memory>
-#include <SFML/Graphics.hpp>
-
 namespace Roguelike
 {
-	class IDelayedAction
-	{
-	protected:
-		bool isTimerStarted_ = false;
-		float destroyTime_ = 0;
-		float currentTime_ = 0;
-	public:
-		void StartTimer(float destroyTime)
-		{
-			destroyTime_ = destroyTime;
-			currentTime_ = destroyTime;
-			isTimerStarted_ = true;
-		}
-	protected:
-		virtual void UpdateTimer(float deltaTime)
-		{
-			if (!isTimerStarted_)
-			{
-				return;
-			}
+class IDelayedAction
+{
+  public:
+    void StartTimer(float delayDuration);
 
-			currentTime_ -= deltaTime;
-			EachTickAction(deltaTime);
+  protected:
+    virtual void FinalAction() = 0;
+    virtual void UpdateAction(float deltaTime) = 0;
+    virtual void UpdateTimer(float deltaTime);
 
-			if (currentTime_ <= 0)
-			{
-				FinalAction();
-				isTimerStarted_ = false;
-			}
-		}
-	protected:
-		virtual void FinalAction() = 0;
-		virtual void EachTickAction(float deltaTime) = 0;
-	};
-}
+    float delayDuration = 0.0F;
+    float currentTime = 0.0F;
+};
+} // namespace Roguelike

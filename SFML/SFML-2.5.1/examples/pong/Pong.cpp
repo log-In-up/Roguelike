@@ -2,12 +2,11 @@
 ////////////////////////////////////////////////////////////
 // Headers
 ////////////////////////////////////////////////////////////
-#include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include <SFML/Graphics.hpp>
 #include <cmath>
-#include <ctime>
 #include <cstdlib>
-
+#include <ctime>
 
 ////////////////////////////////////////////////////////////
 /// Entry point of application
@@ -76,11 +75,11 @@ int main()
 
     // Define the paddles properties
     sf::Clock AITimer;
-    const sf::Time AITime   = sf::seconds(0.1f);
+    const sf::Time AITime = sf::seconds(0.1f);
     const float paddleSpeed = 400.f;
-    float rightPaddleSpeed  = 0.f;
-    const float ballSpeed   = 400.f;
-    float ballAngle         = 0.f; // to be changed later
+    float rightPaddleSpeed = 0.f;
+    const float ballSpeed = 400.f;
+    float ballAngle = 0.f; // to be changed later
 
     sf::Clock clock;
     bool isPlaying = false;
@@ -92,7 +91,7 @@ int main()
         {
             // Window closed or escape key pressed: exit
             if ((event.type == sf::Event::Closed) ||
-               ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape)))
+                ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape)))
             {
                 window.close();
                 break;
@@ -117,8 +116,7 @@ int main()
                     {
                         // Make sure the ball initial angle is not too much vertical
                         ballAngle = (std::rand() % 360) * 2 * pi / 360;
-                    }
-                    while (std::abs(std::cos(ballAngle)) < 0.7f);
+                    } while (std::abs(std::cos(ballAngle)) < 0.7f);
                 }
             }
         }
@@ -128,13 +126,12 @@ int main()
             float deltaTime = clock.restart().asSeconds();
 
             // Move the player's paddle
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) &&
-               (leftPaddle.getPosition().y - paddleSize.y / 2 > 5.f))
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && (leftPaddle.getPosition().y - paddleSize.y / 2 > 5.f))
             {
                 leftPaddle.move(0.f, -paddleSpeed * deltaTime);
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) &&
-               (leftPaddle.getPosition().y + paddleSize.y / 2 < gameHeight - 5.f))
+                (leftPaddle.getPosition().y + paddleSize.y / 2 < gameHeight - 5.f))
             {
                 leftPaddle.move(0.f, paddleSpeed * deltaTime);
             }
@@ -199,7 +196,8 @@ int main()
                     ballAngle = pi - ballAngle - (std::rand() % 20) * pi / 180;
 
                 ballSound.play();
-                ball.setPosition(leftPaddle.getPosition().x + ballRadius + paddleSize.x / 2 + 0.1f, ball.getPosition().y);
+                ball.setPosition(leftPaddle.getPosition().x + ballRadius + paddleSize.x / 2 + 0.1f,
+                                 ball.getPosition().y);
             }
 
             // Right Paddle
@@ -214,7 +212,8 @@ int main()
                     ballAngle = pi - ballAngle - (std::rand() % 20) * pi / 180;
 
                 ballSound.play();
-                ball.setPosition(rightPaddle.getPosition().x - ballRadius - paddleSize.x / 2 - 0.1f, ball.getPosition().y);
+                ball.setPosition(rightPaddle.getPosition().x - ballRadius - paddleSize.x / 2 - 0.1f,
+                                 ball.getPosition().y);
             }
         }
 
